@@ -1,0 +1,14 @@
+<div class="menu flex" [class.open]="toggleMenu">
+    <div class="flex padding-10 menu-icon-wrapper" [class.margin-left-60]="route === productsUrl">
+        <!-- <nb-icon class="hamburger-icon" [config]="{icon: 'menu-2-outline', options: {'icon-font-size': '20px'}}"
+            (click)="toggleMenu = !toggleMenu"></nb-icon> -->
+            <i class="pi pi-align-justify hamburger-icon" (click)="toggleMenu = !toggleMenu"></i>
+        <img class="header-img pointer" width="400" (click)="onMenuClick(menuItems.home)"
+            src="../../../assets/images/logo.svg">
+    </div>
+    <ul class="flex menu-items">
+        <li *ngFor="let item of loginMenu" (click)="onMenuClick(item)" [class.active-menu-item]="activeItem === item">
+            {{ item }}
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,50 @@
+<!-- <nb-layout windowMode [nbSpinner]="loading" nbSpinnerSize="giant" nbSpinnerStatus="primary"> -->
+	<!-- <nb-layout-column> -->
+		<div class="bg-img d-flex">
+			<app-menu></app-menu>
+
+			<!-- <router-outlet></router-outlet> -->
+
+			<div class="footer d-flex">
+				WHAT CAN WE HELP YOU DO TODAY?
+				<span class="number-contact-us-text">
+					985.851.0760 / 866.957.3764 | <a target="_blank" href="{{myGovernmentOnlineOrg}}/#contactus">CONTACT
+						US</a>
+				</span>
+				<div class="follow-us">
+					Follow us on
+					<div class="social-media">
+						<a href="https://www.facebook.com/mygovernmentonline/" target="_blank"><i
+								class="fab facebook-icon"></i></a>
+						<a href="https://twitter.com/MGO_Software" target="_blank"><i class="fab fa-twitter"></i></a>
+						<a href="https://www.instagram.com/mygovernmentonline/" target="_blank"><i
+								class="fab fa-instagram"></i></a>
+					</div>
+					<a href="https://m.mygovernmentonline.org/mobile/" target="_blank">Go to Mobile App</a>
+				</div>
+			</div>
+		</div>
+	<!-- </nb-layout-column> -->
+<!-- </nb-layout> -->
+
+<!-- <p-toast [styleClass]="toastObj && toastObj.sticky ? 'toaster-wide' : 'toaster'" position="top-right" key="toast"
+	[baseZIndex]="1000">
+	<ng-template let-message pTemplate="message">
+		<div class="p-flex p-flex-column" style="flex: 1;">
+			<div class="p-text-center">
+				<div>
+					<i *ngIf="message.severity == 'error'" class="fa fa-exclamation-triangle"
+						style="font-size: 3rem; color: red;"></i>
+					<i *ngIf="message.severity == 'success'" class="fas fa-check"
+						style="font-size: 3rem; color: green;"></i>
+					<i *ngIf="message.severity == 'info'" class="fas fa-info" style="font-size: 3rem; color: blue;"></i>
+					<span style="padding-left: 15px; padding-bottom: 10px; font-size: 2rem;">{{message.summary}}</span>
+				</div>
+				<div [ngStyle]="{'overflow-y': toastObj && toastObj.sticky ? 'scroll' : 'auto' }"
+					style="padding-top: 10px; max-height: 300px !important;">
+					<span [innerHtml]="message.detail" style="white-space: pre-line"></span>
+				</div>
+			</div>
+		</div>
+	</ng-template>
+</p-toast> -->

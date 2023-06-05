@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url("https://rsms.me/inter/inter.css");
+
+$font-family-primary: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+// color palette
+$palette: (
+    white: (
+        1: #ffffff,
+    ),
+    black: (
+        1: #231f20,
+    ),
+    red: (
+        1: #dc3545,
+        4: #fde8e8,
+    ),
+    orange: (
+        1: #fb7800,
+        2: #fdf2e8,
+    ),
+    yellow: (
+        1: #fbc400,
+        2: #fff2c6,
+        4: #fdfce8,
+    ),
+    pink: (
+        1: #9c38d9,
+        4: #f6ecfc,
+    ),
+    green: (
+        1: #198754,
+        4: #e8f7f0,
+    ),
+    blue: (
+        1: #1a76b9,
+        4: #eaf6ff,
+    ),
+    gray: (
+        1: #425d68,
+        2: #737c7d,
+        3: #9e9e9e,
+        4: #cfd4d9,
+        5: #edf2f3,
+        6: #f6f8f9,
+        7: #ebebeb,
+        8: #666666,
+    ),
+    purple: (
+        base: #3f51b5,
+    ),
+);
+
+$fontSize: (
+	xxx-sm: 0.5rem,         // 8px
+	xx-sm: 0.625rem,        // 10px
+	x-sm: 0.75rem,          // 12px
+	sm: 0.875rem,           // 14px
+	regular: 1rem,          // 16px
+	md: 1.125rem,           // 18px
+	lg: 1.25rem,            // 20px
+	x-lg: 1.375rem,         // 22px
+	xx-lg: 1.5rem,          // 24px
+	xxx-lg: 1.625rem,       // 26px
+	huge: 1.75rem,          // 28px
+	x-huge: 1.875rem,       // 30px
+	xx-huge: 2rem,          // 32px
+	xxx-huge: 2.125rem,     // 34px
+	mighty: 2.25rem,        // 36px
+);
