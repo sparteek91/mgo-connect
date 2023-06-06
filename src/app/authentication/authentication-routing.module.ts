@@ -6,7 +6,7 @@ import { AuthWrapperComponent } from './auth-wrapper/auth-wrapper.component';
 // import { CustomerPortalLoginOptionComponent } from './customer-portal-login-option/customer-portal-login-option.component';
 // import { ForgotPasswordVerificationComponent } from './forgot-password-verification/forgot-password-verification.component';
 // import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-// import { HomeLoginComponent } from './home/home.component';
+import { HomeLoginComponent } from './home/home.component';
 // import { LoggedInAuthGuard } from './logged-in-auth.guard';
 // import { LoginComponent } from './login/login.component';
 // import { ProductsComponent } from './products/products.component';
@@ -15,9 +15,9 @@ const routes: Routes = [{
     path: APP_ROUTES.root,
     component: AuthWrapperComponent,
     children: [
-        // {
-        //     path: APP_ROUTES.root,
-            // component: HomeLoginComponent,
+        {
+            path: APP_ROUTES.root,
+            component: HomeLoginComponent,
             // children: [
             //     {
             //         path: '',
@@ -43,7 +43,7 @@ const routes: Routes = [{
             //         component: ForgotPasswordVerificationComponent,
             //     },
             // ],
-        // },
+        },
         // {
         //     path: 'products',
         //     component: ProductsComponent,

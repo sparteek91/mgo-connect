@@ -1,0 +1,16 @@
+:host {
+    height: 100%;
+}
+
+::ng-deep {
+    .contact-us {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+
+        /* Black */
+        color: #231F20;
+    }
+}

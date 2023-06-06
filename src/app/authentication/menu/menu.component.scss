@@ -16,132 +16,9 @@
 //     }
 // }
 
-// .menu {
-//     background-color: map-get(map-get($palette, white), 1);
-//     z-index: 999;
-//     width: 100%;
-//     transition: transform 0.4s;
-
-//     .menu-items {
-//         list-style-type: none;
-//         // width: 60%;
-//         margin: 0;
-//         align-items: center;
-
-//         li {
-//             margin-right: 48px;
-//             line-height: 28px;
-//             cursor: pointer;
-
-//             &.active-menu-item {
-//                 border-bottom: 2px solid map-get(map-get($palette, blue), 1);
-//                 margin-bottom: -3px;
-//             }
-//         }
-//     }
-
-//     .menu-icon-wrapper {
-//         // min-width: 280px;
-//         // width: 100%;
-//         // max-width: 45%;
-//         // margin-left: auto;
-
-//         .logo {
-//             max-width: 700px;
-//             height: auto;
-//         }
-
-//         .hamburger-icon {
-//             display: none;
-//             font-size: 20px;
-//         }
-//     }
-
-//     @media only screen and (max-width: 450px) {
-//         .menu-icon-wrapper {
-//             .logo {
-//                 width: calc(100% - 50px) !important;
-//             }
-//         }
-//     }
-
-//     // @media only screen and (min-width: 450px) and (max-width: 800px) {
-//     //     .menu-icon-wrapper {
-//     //         justify-content: flex-start !important;
-//     //     }
-
-//     //     img {
-//     //         width: calc(100% - 130px) !important;
-//     //     }
-//     // }
-
-//     @media only screen and (max-width: 800px) {
-//         background-color: map-get(map-get($palette, white), 1);
-//         position: fixed;
-//         flex-direction: column;
-
-//         .menu-icon-wrapper {
-//             align-items: center;
-//             justify-content: space-around;
-//             margin-left: 0 !important;
-//             max-width: 100% !important;
-//             min-width: auto !important;
-
-//             // .logo {
-//             //     margin: 0 20px !important;
-//             // }
-
-//             .hamburger-icon {
-//                 display: block;
-//                 width: 100%;
-//                 height: 100%;
-//                 min-width: 20px;
-//                 min-height: 20px;
-//                 margin-left: 10px;
-//             }
-//         }
-
-//         .menu-items {
-//             flex-direction: column;
-//             width: 100vw !important;
-//             display: none !important;
-//             box-shadow: 0 4px 2px -2px #ccc;
-
-//             li {
-//                 padding: 10px 0;
-//             }
-//         }
-//     }
-// }
-
-// .open {
-//     .menu-items {
-//         display: flex !important;
-//     }
-// }
-
-// .scroll-down.menu {
-//     transform: translate3d(0, -100%, 0);
-// }
-
-// .scroll-up.menu {
-//     transform: none;
-//     position: fixed;
-//     top: 0;
-//     left: 0;
-//     right: 0;
-//     box-shadow: 0 4px 2px -2px #ccc;
-// }
-
-// .color-gray {
-//     background-color: #edf1f7;
-// }
-
-// .margin-left-60 {
-//     margin-left: 60px !important;
-// }
 
 .navbar {
+
     .navbar-toggler {
         border: 0;
 
@@ -153,6 +30,7 @@
             font-size: 24px;
         }
     }
+
     .navbar-nav {
         .nav-item {
             .nav-link {
@@ -191,10 +69,4 @@
             }
         }
     }
-
-    // @media only screen and (max-width: 425px) {
-    //     .header-fluid { {
-
-    //     }
-    // }
 }

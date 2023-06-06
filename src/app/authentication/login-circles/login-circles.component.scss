@@ -1,0 +1,24 @@
+:host {
+    height: 100%;
+    width: 100%;
+    display: flex;
+
+    svg {
+        align-self: flex-start;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+#landManagement,
+#assetsAndCmms,
+#communityEngagement,
+#permitsLicensing,
+#morePage,
+.landManagement,
+.assetsAndCmms,
+.communityEngagement,
+.permitsLicensing,
+.morePage {
+    cursor: pointer;
+}

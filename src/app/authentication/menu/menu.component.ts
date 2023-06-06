@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { fromEvent, Subscription } from 'rxjs';
@@ -33,7 +33,7 @@ export class MenuComponent {
 	route!: string;
 	toggleMenu: boolean = false;
 
-	constructor(private router: Router, private menuService: MenuService) {
+	constructor(private router: Router, private cdr: ChangeDetectorRef) {
 		this.subscription.push(
 			this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
 				this.route = event.url;
@@ -69,6 +69,11 @@ export class MenuComponent {
 	// 			break;
 	// 	}
 	// }
+
+	toggleMenuAction(): void {
+		this.toggleMenu = !this.toggleMenu;
+		this.cdr.markForCheck();
+	}
 
 	ngAfterViewInit() {
 		const element: any = document.querySelector('.scrollable-container');

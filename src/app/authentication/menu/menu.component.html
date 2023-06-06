@@ -1,11 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-white">
-    {{toggleMenu}}
-    <div class="container-fluid header-fluid" [ngClass]="{
-        'no-wrap': toggleMenu
-    }">
+    <div class="container-fluid header-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="pi pi-align-justify" (click)="toggleMenu != toggleMenu;"></i>
+            <i class="pi pi-align-justify" (click)="toggleMenuAction()"></i>
         </button>
 
         <a class="navbar-brand" [routerLink]="[routes.root]">
@@ -15,9 +12,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-md-5">
                 <li class="nav-item" *ngFor="let item of loginMenu">
-                    <a class="nav-link text-xl" [routerLink]="[item.path]" routerLinkActive="active">
-                        <span>{{ item.title }}</span>
-                    </a>
+                    <ng-container *ngIf="item.isExternal">
+                        <a class="nav-link text-xl" [href]="[item.path]" target="_blank">
+                            <span>{{ item.title }}</span>
+                        </a>
+                    </ng-container>
+                    <ng-container *ngIf="!item.isExternal">
+                        <a class="nav-link text-xl" [routerLink]="[item.path]" routerLinkActive="active">
+                            <span>{{ item.title }}</span>
+                        </a>
+                    </ng-container>
                 </li>
             </ul>
         </div>
