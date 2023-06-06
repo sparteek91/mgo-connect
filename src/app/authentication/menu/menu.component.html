@@ -1,14 +1,25 @@
-<div class="menu flex" [class.open]="toggleMenu">
-    <div class="flex padding-10 menu-icon-wrapper" [class.margin-left-60]="route === productsUrl">
-        <!-- <nb-icon class="hamburger-icon" [config]="{icon: 'menu-2-outline', options: {'icon-font-size': '20px'}}"
-            (click)="toggleMenu = !toggleMenu"></nb-icon> -->
-            <i class="pi pi-align-justify hamburger-icon" (click)="toggleMenu = !toggleMenu"></i>
-        <img class="header-img pointer" width="400" (click)="onMenuClick(menuItems.home)"
-            src="../../../assets/images/logo.svg">
+<nav class="navbar navbar-expand-lg bg-white">
+    {{toggleMenu}}
+    <div class="container-fluid header-fluid" [ngClass]="{
+        'no-wrap': toggleMenu
+    }">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="pi pi-align-justify" (click)="toggleMenu != toggleMenu;"></i>
+        </button>
+
+        <a class="navbar-brand" [routerLink]="[routes.root]">
+            <img src="../../../assets/images/logo.svg" alt="Logo" class="img-fluid" width="600" height="57">
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-md-5">
+                <li class="nav-item" *ngFor="let item of loginMenu">
+                    <a class="nav-link text-xl" [routerLink]="[item.path]" routerLinkActive="active">
+                        <span>{{ item.title }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <ul class="flex menu-items">
-        <li *ngFor="let item of loginMenu" (click)="onMenuClick(item)" [class.active-menu-item]="activeItem === item">
-            {{ item }}
-        </li>
-    </ul>
-</div>
+</nav>

@@ -1,0 +1,12 @@
+// Core
+@import "./core/variable";
+@import "./core/base";
+
+
+.pointer {
+    cursor: pointer;
+}
+
+.bg-white {
+    background-color: map-get(map-get($palette, white), 2);
+}
