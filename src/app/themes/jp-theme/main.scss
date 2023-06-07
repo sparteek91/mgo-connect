@@ -7,6 +7,15 @@
     cursor: pointer;
 }
 
+.rel {
+    position: relative;
+}
+
+.fs-1vw { font-size: 1vw; }
+
+.width-1vw { width: 1vw; }
+.width-2vw { width: 2vw; }
+
 .bg-white {
     background-color: map-get(map-get($palette, white), 2);
 }

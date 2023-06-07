@@ -1,31 +1,31 @@
-<!-- <nb-layout windowMode [nbSpinner]="loading" nbSpinnerSize="giant" nbSpinnerStatus="primary"> -->
-	<!-- <nb-layout-column> -->
-		<div class="bg-img d-flex">
-			<app-menu></app-menu>
+<div class="h-100">
+	<app-menu></app-menu>
 
-			<router-outlet></router-outlet>
+	<main>
+		<router-outlet></router-outlet>
+	</main>
 
-			<div class="footer d-flex">
-				WHAT CAN WE HELP YOU DO TODAY?
-				<span class="number-contact-us-text">
-					985.851.0760 / 866.957.3764 | <a target="_blank" href="{{myGovernmentOnlineOrg}}/#contactus">CONTACT
-						US</a>
-				</span>
-				<div class="follow-us">
-					Follow us on
-					<div class="social-media">
-						<a href="https://www.facebook.com/mygovernmentonline/" target="_blank"><i
-								class="fab facebook-icon"></i></a>
-						<a href="https://twitter.com/MGO_Software" target="_blank"><i class="fab fa-twitter"></i></a>
-						<a href="https://www.instagram.com/mygovernmentonline/" target="_blank"><i
-								class="fab fa-instagram"></i></a>
-					</div>
-					<a href="https://m.mygovernmentonline.org/mobile/" target="_blank">Go to Mobile App</a>
-				</div>
-			</div>
+	<footer class="rel">
+		<img src="assets/images/waves.svg" class="img-fluid" alt="footer banner">
+		<div class="contact-info">
+			<p class="font-medium mb-1">WHAT CAN WE HELP YOU DO TODAY?</p>
+			<p class="font-medium mb-1">
+				985.851.0760 / 866.957.3764 | <a class="no-underline" target="_blank" href="{{myGovernmentOnlineOrg}}/#contactus">CONTACT US</a>
+			</p>
 		</div>
-	<!-- </nb-layout-column> -->
-<!-- </nb-layout> -->
+		<div class="follow-us d-flex align-items-center flex-column gap-3">
+			<span class="fs-1vw font-semibold">Follow us on</span>
+			<div class="social-media">
+				<a *ngFor="let item of socialHandles" [href]="item.path" target="_blank" class="mx-3">
+					<img [src]="item.img" [alt]="item.title" class="{{item.class}}">
+				</a>
+			</div>
+			<a href="https://m.mygovernmentonline.org/mobile/" target="_blank" class="fs-1vw font-semibold no-underline">
+				Go to Mobile App
+			</a>
+		</div>
+	</footer>
+</div>
 
 <!-- <p-toast [styleClass]="toastObj && toastObj.sticky ? 'toaster-wide' : 'toaster'" position="top-right" key="toast"
 	[baseZIndex]="1000">

@@ -6,15 +6,14 @@ import { UserService } from '../../@core/mock/users.service';
 import { Auth, Hub } from 'aws-amplify';
 import { HttpHandlerService } from '../../@core/http/http-handler.service';
 import { AuthHandlerService } from "../../@core/http/auth-handler.service";
-// import { DataLocalService } from 'app/customer-portal/utils/data-local.service';
+import { DataLocalService } from '../../customer-portal/services/data-local.service';
 import { API_Routes } from '../../@routes';
-import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'ngx-login',
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.scss'],
-	providers: []
+	providers: [DataLocalService]
 })
 
 export class LoginComponent implements OnInit, OnDestroy {
@@ -41,7 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		private httpService: HttpHandlerService,
 		private authService: AuthHandlerService,
 		private frameService: FrameService,
-		// private dataLocalService: DataLocalService
+		private dataLocalService: DataLocalService
 	) {
 
 		Hub.listen("auth", ({ payload: { event, data } }) => {
@@ -157,8 +156,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 		localStorage.setItem('CPJurisdictionID', this.jurisdictionForm.value.Jurisdiction.JurisdictionID);
 		localStorage.setItem('CPState', this.jurisdictionForm.value.State.StateID);
 		localStorage.setItem('CPStateName', this.jurisdictionForm.value.State.State);
-		// this.dataLocalService.changeJurisdictionName.next(this.jurisdictionForm.value.Jurisdiction.Jurisdiction);
-		// this.dataLocalService.selectedJurisdiction.next(this.jurisdictionForm.value.Jurisdiction);
+		this.dataLocalService.changeJurisdictionName.next(this.jurisdictionForm.value.Jurisdiction.Jurisdiction);
+		this.dataLocalService.selectedJurisdiction.next(this.jurisdictionForm.value.Jurisdiction);
 		window.location.replace('cp/portal');
 	}
 }

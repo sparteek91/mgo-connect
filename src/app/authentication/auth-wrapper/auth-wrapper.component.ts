@@ -3,6 +3,13 @@ import { FrameService } from '../../@core/mock/frame.service';
 import { environment } from '../../../environments/environment';
 import { MessageService } from 'primeng/api';
 
+interface ISocialHandles {
+	title: string;
+	img: string;
+	class: string;
+	path: string;
+}
+
 @Component({
 	selector: 'ngx-auth-wrapper',
 	templateUrl: './auth-wrapper.component.html',
@@ -13,8 +20,12 @@ export class AuthWrapperComponent implements OnInit {
 	loading: boolean = false;
 	toastObj: any;
 	myGovernmentOnlineOrg = environment.myGovernmentOnlineOrg;
+	socialHandles: ISocialHandles[] = [
+		{ title: "Facebook", img: "assets/icons/facebook.svg", class: "width-1vw", path: "https://www.facebook.com/mygovernmentonline/" },
+		{ title: "Twitter", img: "assets/icons/twitter.svg", class: "width-2vw", path: "https://twitter.com/MGO_Software" },
+		{ title: "Instagram", img: "assets/icons/instagram.svg", class: "width-2vw", path: "https://www.instagram.com/mygovernmentonline/" },
+	]
 	
-	// 
 	constructor(private frameService: FrameService, private cdr: ChangeDetectorRef, private readonly messageService: MessageService) { }
 
 	ngOnInit(): void {

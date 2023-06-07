@@ -1,22 +1,22 @@
-<div class="d-flex main-content">
-	<div class="left-side">
-		<div class="content">
-			<div>
-				<!-- <router-outlet></router-outlet> -->
-			</div>
-			<div class="contact-us">
-				Have a question or would like to schedule a demo?
-				<a target="_blank" href="{{myGovernmentOnlineOrg}}/#contactus" type="button" class="primary-outline-button w-100">
-					<img style="height: 37px;" src="../../../assets/icons/mail.svg" /> CONTACT US
-				</a>
-
-				<!-- <button type="button" class="primary-outline-button w-100" (click)="gotoContactUs()">
-					<img style="height: 37px;" src="../../../assets/icons/mail.svg" /> Contact Us
-				</button> -->
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6 col-sm-12">
+			<div class="auth-options py-5">
+				<div>
+					<router-outlet></router-outlet>
+				</div>
+				<div class="contact-us font-bold">
+					Have a question or would like to schedule a demo?
+					<a target="_blank" href="{{myGovernmentOnlineOrg}}/#contactus" type="button" class="primary-outline-button d-flex justify-content-center align-items-center gap-1">
+						<img width="30" height="29" src="../../../assets/icons/mail.svg" /> CONTACT US
+					</a>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="side-img">
-		<app-login-circles></app-login-circles>
+		<div class="col-md-6 d-none d-sm-none d-md-block">
+			<div class="auth-banner py-5">
+				<app-login-circles></app-login-circles>
+			</div>
+		</div>
 	</div>
 </div>

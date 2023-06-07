@@ -1,3 +1,52 @@
+@import "../../themes/jp-theme/core/variable";
+
+main {
+    height: calc(100% - 77px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    .contact-info {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        text-align: center;
+        color: map-get(map-get($palette, white), 1);
+
+        p {
+            &:first-child {
+                font-size: 1.5vw;
+            }
+
+            &:last-child {
+                font-size: 1vw;
+            }
+
+            a {
+                color: map-get(map-get($palette, white), 1);
+            }
+        }
+    }
+
+    .follow-us {
+        position: absolute;
+        bottom: 6px;
+        right: 50px;
+        color: map-get(map-get($palette, white), 1);
+
+        a {
+            color: map-get(map-get($palette, white), 1);
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        display: none;
+    }
+}
+
 ::ng-deep ngx-auth-wrapper {
     .primary-button {
         border-radius: 4px;
@@ -6,8 +55,8 @@
         line-height: 46px;
         padding: 5px 15px !important;
         border-color: transparent;
-        background: rgba(26, 118, 185, .8);
-        outline: #1A76B9;
+        background: rgba(26, 118, 185, 0.8);
+        outline: #1a76b9;
         color: #ffffff;
 
         &:enabled:hover {
@@ -15,15 +64,15 @@
         }
 
         &:enabled:active {
-            outline: 5px auto rgba(26, 118, 185, 1)
+            outline: 5px auto rgba(26, 118, 185, 1);
         }
 
         &:enabled:focus-visible {
-            outline: 5px auto rgba(26, 118, 185, 1)
+            outline: 5px auto rgba(26, 118, 185, 1);
         }
 
         &:enabled:focus {
-            outline: 5px auto rgba(26, 118, 185, 1)
+            outline: 5px auto rgba(26, 118, 185, 1);
         }
     }
 
@@ -35,10 +84,10 @@
         font-size: 20px;
         line-height: 46px;
         padding: 5px 15px !important;
-        border-color: rgba(26, 118, 185, .8);
-        color: rgba(26, 118, 185, .8) !important;
+        border-color: rgba(26, 118, 185, 0.8);
+        color: rgba(26, 118, 185, 0.8) !important;
         background: #ffffff;
-        outline-color: rgba(26, 118, 185, .8);
+        outline-color: rgba(26, 118, 185, 0.8);
         border-width: 1px;
         border-style: solid;
 
@@ -63,25 +112,7 @@
         }
     }
 
-    @media only screen and (min-width: 2000px) {
-
-        nb-card-header,
-        nb-card-body {
-            padding: 1.5rem !important;
-        }
-
-        .content {
-            margin-top: 5px !important;
-        }
-    }
-
     @media only screen and (max-width: 900px) {
-
-        nb-card-header,
-        nb-card-body {
-            font-size: 1.5vw !important;
-            line-height: 1.5vw !important;
-        }
 
         .text-info {
             font-size: 1.1vw !important;
@@ -97,40 +128,9 @@
         input {
             height: 3.5vw !important;
         }
-
-        .contact-us-text {
-            font-size: 1.4vw !important;
-            line-height: 1.4vw !important;
-        }
-
-        .follow-us {
-            right: 1.5vw !important;
-            bottom: 1.5vw !important;
-            font-size: 1.3vw !important;
-
-            .social-media {
-                margin: 1vw 0 !important;
-
-                .fab {
-                    font-size: 3vw !important;
-                    width: 3vw !important;
-                }
-
-                .fa-twitter {
-                    margin: 0 2vw !important;
-                }
-            }
-        }
     }
 
     @media only screen and (max-width: 700px) {
-
-        nb-card-header,
-        nb-card-body {
-            font-size: 14px !important;
-            line-height: 14px !important;
-        }
-
         .text-info {
             font-size: 10px !important;
             margin-top: 10px !important;
@@ -146,46 +146,12 @@
             height: 42px !important;
         }
 
-        .contact-us-text {
-            font-size: 20px !important;
-            line-height: 20px !important;
-        }
-
-        .left-side {
-            min-width: 90% !important;
-        }
-
         .form-group {
             margin-bottom: 10px !important;
-        }
-
-        // button {
-        //     font-size: 10px !important;
-        //     padding: 1rem !important;
-        // }
-
-        .main-content {
-            height: 100%;
-
-            .left-side {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-
-                .content {
-                    margin-top: 50px !important;
-                    max-width: 100% !important;
-                }
-            }
         }
     }
 
     @media only screen and (orientation: landscape) and (max-device-width: 900px) {
-
-        nb-card-header,
-        nb-card-body {
-            font-size: 1.6vw !important;
-        }
 
         .form-control-label,
         input,
@@ -196,211 +162,5 @@
         input {
             height: 5vw !important;
         }
-
-        // button {
-        //     height: 4vw !important;
-        //     font-size: 1.2vw !important;
-        // }
-    }
-
-    .login-content {
-        margin-top: 30px;
-        display: flex;
-    }
-
-    .bg-img {
-        background-image: url("/assets/images/waves.svg");
-        flex-direction: column;
-        justify-content: space-between;
-        position: relative;
-
-        /* Center and scale the image nicely */
-        background-position: bottom;
-        background-repeat: no-repeat;
-        background-size: 100%;
-
-        // /* Set up proportionate scaling */
-        width: 100%;
-        height: 100%;
-
-        @media only screen and (max-width: 700px) {
-            background-image: none;
-
-            .side-img,
-            .footer {
-                display: none !important;
-            }
-        }
-
-        .underform-text {
-            font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-        }
-
-        .main-content {
-            justify-content: space-around;
-
-            .side-img {
-                // height: calc(100vh - 150px);
-                margin-top: 30px;
-                width: 50%;
-                // background-image: url("../../../assets/images/phone.svg");
-                // background-position: center;
-                // background-repeat: no-repeat;
-                // background-size: contain;
-
-                @media (min-width: 2000px) {
-                    height: calc(100vh - 250px);
-                }
-            }
-
-            .left-side {
-                min-width: 280px;
-                width: 100%;
-                max-width: 451px;
-                margin: 0 auto;
-                padding: 0 10px;
-
-                .header-img {
-                    width: 100%;
-                    outline: none;
-                }
-            }
-
-            .content {
-                margin-top: 15px;
-
-                .contact-us-text {
-                    font-size: 1.1vw;
-                    line-height: 1.3vw;
-                    font-weight: bold;
-                    text-align: left;
-                    letter-spacing: 0.5px;
-
-                    .contact-us-link {
-                        padding: 0 !important;
-                        text-decoration: none !important;
-                    }
-                }
-
-                input {
-                    height: 3vw;
-                    font-size: 0.9vw;
-
-                    &::-webkit-input-placeholder {
-                        /* Chrome/Opera/Safari */
-                        font-size: 0.9vw;
-                    }
-                }
-
-                nb-card-header,
-                nb-card-body {
-                    line-height: 1.2vw;
-                    font-size: 1.2vw;
-                    padding: 1rem;
-                }
-
-                button {
-                    // color: white !important;
-                    // height: 2.5vw;
-                    // font-size: 1vw;
-                    margin-top: 15px;
-                }
-
-                .text-info {
-                    font-size: 0.8vw;
-                    margin-top: 15px;
-                    line-height: normal;
-                }
-
-                nb-card {
-                    margin-bottom: 3px;
-                }
-
-                // .text-danger {
-                //     font-size: 10px;
-                // }
-
-                @media only screen and (max-width: 950px) and (min-width: 700px) {
-                    margin-top: 10px !important;
-
-                    nb-card {
-                        margin-bottom: 0px !important;
-                    }
-                }
-            }
-        }
-
-        .footer {
-            align-items: center;
-            color: white;
-            flex-direction: column;
-            font-size: 1.5vw;
-            letter-spacing: 1px;
-            line-height: 2vw;
-
-            .number-contact-us-text {
-                font-size: 1vw !important;
-
-                a {
-                    color: white;
-                    text-decoration: none;
-                }
-            }
-
-            .follow-us {
-                position: absolute;
-                bottom: 1vw;
-                right: 1vw;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                font-size: 1vw;
-                letter-spacing: 0px;
-
-                .social-media {
-                    margin: 0.5vw 0;
-
-                    .fa-twitter {
-                        margin: 0 1vw;
-                    }
-
-                    .fab {
-                        font-size: 2vw;
-                        width: 2vw;
-                        text-align: center;
-                    }
-
-                    .facebook-icon::before {
-                        content: "\f39e";
-                    }
-                }
-
-                a {
-                    color: #ffffff !important;
-                    text-decoration: none;
-
-                    &:hover {
-                        color: darken(#ffffff, 10%) !important;
-                    }
-                }
-            }
-        }
-
-        .form-group {
-            margin-bottom: 3px;
-
-            .form-control-label {
-                line-height: 1.2vw;
-                font-size: 0.9vw;
-            }
-        }
-
-        .nb-card-auth {
-            margin-bottom: 7px !important;
-        }
-    }
-
-    nb-layout-column {
-        padding: 0 !important;
     }
 }

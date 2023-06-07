@@ -1,24 +1,36 @@
-<nav class="navbar navbar-expand-lg bg-white">
+<nav class="navbar navbar-expand-lg bg-white p-3">
     <div class="container-fluid header-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="pi pi-align-justify" (click)="toggleMenuAction()"></i>
+            <!-- <svg (click)="toggleMenuAction()" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24"
+                class="eva eva-menu-2-outline" fill="currentColor" icon-font-size="20px">
+                <g data-name="Layer 2">
+                    <g data-name="menu-2">
+                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                        <circle cx="4" cy="12" r="1"></circle>
+                        <rect x="7" y="11" width="14" height="2" rx=".94" ry=".94"></rect>
+                        <rect x="3" y="16" width="18" height="2" rx=".94" ry=".94"></rect>
+                        <rect x="3" y="6" width="18" height="2" rx=".94" ry=".94"></rect>
+                    </g>
+                </g>
+            </svg> -->
         </button>
 
         <a class="navbar-brand" [routerLink]="[routes.root]">
-            <img src="../../../assets/images/logo.svg" alt="Logo" class="img-fluid" width="600" height="57">
+            <img src="../../../assets/images/logo.svg" alt="Logo" class="img-fluid" width="800" height="77">
         </a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-md-5">
                 <li class="nav-item" *ngFor="let item of loginMenu">
                     <ng-container *ngIf="item.isExternal">
-                        <a class="nav-link text-xl" [href]="[item.path]" target="_blank">
+                        <a class="nav-link text-xl px-3" [href]="[item.path]" target="_blank">
                             <span>{{ item.title }}</span>
                         </a>
                     </ng-container>
                     <ng-container *ngIf="!item.isExternal">
-                        <a class="nav-link text-xl" [routerLink]="[item.path]" routerLinkActive="active">
+                        <a class="nav-link text-xl px-3" [routerLink]="[item.path]" routerLinkActive="active">
                             <span>{{ item.title }}</span>
                         </a>
                     </ng-container>

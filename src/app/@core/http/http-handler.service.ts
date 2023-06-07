@@ -38,6 +38,7 @@ export class HttpHandlerService {
 
 	get(endPoint: string, flag: string = ''): Observable<any> {
 		return this.http.get(endPoint, this.httpOptions).pipe(map((data: any) => {
+			console.log("data", data);
 			if (flag == 'WorkOrderOffline') {
 				getWorkOrderOffline.data = data;
 			}

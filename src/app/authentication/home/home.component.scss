@@ -1,16 +1,28 @@
-:host {
-    height: 100%;
+// :host {
+//     height: 100%;
+// }
+
+.auth-options {
+    min-width: 280px;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 0 10px;
 }
 
-::ng-deep {
+.auth-banner {
+
+}
+
+// ::ng-deep {
     .contact-us {
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 700;
+        // font-family: 'Inter';
+        // font-style: normal;
+        // font-weight: 700;
         font-size: 20px;
         line-height: 24px;
 
         /* Black */
         color: #231F20;
     }
-}
+// }
