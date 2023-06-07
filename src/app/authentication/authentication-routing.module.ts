@@ -7,8 +7,8 @@ import { AuthWrapperComponent } from './auth-wrapper/auth-wrapper.component';
 // import { ForgotPasswordVerificationComponent } from './forgot-password-verification/forgot-password-verification.component';
 // import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HomeLoginComponent } from './home/home.component';
-// import { LoggedInAuthGuard } from './logged-in-auth.guard';
-// import { LoginComponent } from './login/login.component';
+import { LoggedInAuthGuard } from '../@guards/logged-in-auth.guard';
+import { LoginComponent } from './login/login.component';
 // import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [{
@@ -18,17 +18,9 @@ const routes: Routes = [{
         {
             path: APP_ROUTES.root,
             component: HomeLoginComponent,
-            // children: [
-            //     {
-            //         path: '',
-            //         redirectTo: 'login',
-            //         pathMatch: 'full',
-            //     },
-            //     {
-            //         path: 'login',
-            //         component: LoginComponent,
-            //         canActivate: [LoggedInAuthGuard],
-            //     },
+            children: [
+                { path: APP_ROUTES.root, redirectTo: APP_ROUTES.login, pathMatch: 'full' },
+                { path: APP_ROUTES.login, component: LoginComponent, canActivate: [LoggedInAuthGuard] },
             //     {
             //         path: 'cplogin',
             //         component: CustomerPortalLoginOptionComponent,
@@ -42,7 +34,7 @@ const routes: Routes = [{
             //         path: 'forgotPasswordVerification',
             //         component: ForgotPasswordVerificationComponent,
             //     },
-            // ],
+            ],
         },
         // {
         //     path: 'products',

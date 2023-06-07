@@ -10,5 +10,7 @@ export class APP_ROUTES {
   public static signup: string = 'signup';
   public static forgotPassword: string = 'forgot-password';
   public static products: string = 'products';
+
+  public static cp: string = 'cp';
   
 }

@@ -2,6 +2,7 @@ import { environment } from "../../environments/environment";
 
 export class API_Routes {
     public static apiBaseUrl: string = `${environment.baseApiUrl}/`;
+    public static mobileApiUrl: string = `${environment.mobileApiUrl}/`;
 
     public static get cognitoUser(): string {
         return this.apiBaseUrl + "cognitouser/";
@@ -13,5 +14,13 @@ export class API_Routes {
 
     public static get createInspection(): string {
         return this.apiBaseUrl + "api/v3/jp/inspections/create-inspection/"; 
+    }
+
+    public static get getStates(): string {
+        return this.mobileApiUrl + "helper/getstates/"; 
+    }
+
+    public static get getJurisdictions(): string {
+        return this.mobileApiUrl + "helper/getjurisdictions/"; 
     }
 }

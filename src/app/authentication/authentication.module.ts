@@ -7,7 +7,7 @@ import { ConfirmationService } from 'primeng/api';
 import { TooltipModule } from 'primeng/tooltip';
 import { AccordionModule } from 'primeng/accordion';
 import { TableModule } from 'primeng/table';
-// import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/login.component';
 import { AuthWrapperComponent } from './auth-wrapper/auth-wrapper.component';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 // import { CommonModule } from '@angular/common';
@@ -48,7 +48,7 @@ import { MenubarModule } from 'primeng/menubar';
 		// SharedModule
 	],
 	declarations: [
-		// LoginComponent,
+		LoginComponent,
 		AuthWrapperComponent,
 		// ForgotPasswordComponent,
 		// ForgotPasswordVerificationComponent,
