@@ -1,0 +1,100 @@
+// Outline buttons
+@mixin btnVariant(
+    $background,
+    $border,
+    $color,
+    $hover-background,
+    $hover-border,
+    $hover-color,
+    $active-background,
+    $active-border,
+    $active-color,
+    $active-border-width,
+    $disabled-background,
+    $disabled-border,
+    $disabled-color,
+    $padding,
+    $radius: 0.25rem,
+    $box-shadow: none
+) {
+    background-color: $background;
+    color: $color;
+    @if $border != 0 {
+        border: $border;
+    }
+    border-radius: $radius;
+    padding: $padding;
+
+    &:hover {
+        color: $hover-color;
+        background-color: $hover-background;
+        border-color: $hover-border;
+    }
+
+    &:disabled {
+        color: $disabled-color;
+        background-color: $disabled-background;
+        border-color: $disabled-border;
+    }
+
+    &:active {
+        color: $active-color;
+        background-color: $active-background;
+        border-color: $active-border;
+        border: $active-border-width;
+    }
+}
+
+.btn_primary_outline {
+    font-size: map-get($fontSize, regular);
+    font-weight: 500;
+    @include btnVariant(
+        // normal
+        map-get(map-get($palette, white), 1),
+        $border-thin,
+        map-get(map-get($palette, blue), 1),
+        // hover
+        map-get(map-get($palette, white), 1),
+        map-get(map-get($palette, blue), 1),
+        map-get(map-get($palette, blue), 1),
+        // active
+        map-get(map-get($palette, white), 1),
+        map-get(map-get($palette, blue), 1),
+        map-get(map-get($palette, blue), 1),
+        $border-thick,
+        // disabled
+        map-get(map-get($palette, white), 1),
+        map-get(map-get($palette, blue), 1),
+        map-get(map-get($palette, blue), 1),
+        // others
+        5px 15px
+        4px
+    );
+}
+
+.btn_primary {
+    font-size: map-get($fontSize, regular);
+    font-weight: 500;
+    @include btnVariant(
+        // normal
+        map-get(map-get($palette, blue), 1),
+        $border-thin,
+        map-get(map-get($palette, white), 1),
+        // hover
+        map-get(map-get($palette, blue), 1),
+        map-get(map-get($palette, white), 1),
+        map-get(map-get($palette, white), 1),
+        // active
+        map-get(map-get($palette, blue), 1),
+        map-get(map-get($palette, white), 1),
+        map-get(map-get($palette, white), 1),
+        $border-thin,
+        // disabled
+        map-get(map-get($palette, blue), 1),
+        map-get(map-get($palette, white), 1),
+        map-get(map-get($palette, white), 1),
+        // others
+        5px 15px
+        4px
+    );
+}

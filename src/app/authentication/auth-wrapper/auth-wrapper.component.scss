@@ -1,12 +1,5 @@
 @import "../../themes/jp-theme/core/variable";
 
-main {
-    height: calc(100% - 77px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 footer {
     .contact-info {
         position: absolute;
@@ -47,120 +40,11 @@ footer {
     }
 }
 
-::ng-deep ngx-auth-wrapper {
-    .primary-button {
-        border-radius: 4px;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 46px;
-        padding: 5px 15px !important;
-        border-color: transparent;
-        background: rgba(26, 118, 185, 0.8);
-        outline: #1a76b9;
-        color: #ffffff;
-
-        &:enabled:hover {
-            background: rgba(26, 118, 185, 1);
-        }
-
-        &:enabled:active {
-            outline: 5px auto rgba(26, 118, 185, 1);
-        }
-
-        &:enabled:focus-visible {
-            outline: 5px auto rgba(26, 118, 185, 1);
-        }
-
-        &:enabled:focus {
-            outline: 5px auto rgba(26, 118, 185, 1);
-        }
-    }
-
-    a.primary-outline-button,
-    .primary-outline-button {
-        text-decoration: none;
-        border-radius: 4px;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 46px;
-        padding: 5px 15px !important;
-        border-color: rgba(26, 118, 185, 0.8);
-        color: rgba(26, 118, 185, 0.8) !important;
-        background: #ffffff;
-        outline-color: rgba(26, 118, 185, 0.8);
-        border-width: 1px;
-        border-style: solid;
-
-        &:enabled:hover {
-            color: rgba(26, 118, 185, 1);
-            border-color: rgba(26, 118, 185, 1);
-        }
-
-        &:enabled:active {
-            color: rgba(26, 118, 185, 1);
-            border-color: rgba(26, 118, 185, 1);
-        }
-
-        &:enabled:focus-visible {
-            color: rgba(26, 118, 185, 1);
-            border-color: rgba(26, 118, 185, 1);
-        }
-
-        &:enabled:focus {
-            color: rgba(26, 118, 185, 1);
-            border-color: rgba(26, 118, 185, 1);
-        }
-    }
-
-    @media only screen and (max-width: 900px) {
-
-        .text-info {
-            font-size: 1.1vw !important;
-            margin-top: 10px !important;
-        }
-
-        .form-control-label,
-        input,
-        input::-webkit-input-placeholder {
-            font-size: 1.1vw !important;
-        }
-
-        input {
-            height: 3.5vw !important;
-        }
-    }
-
-    @media only screen and (max-width: 700px) {
-        .text-info {
-            font-size: 10px !important;
-            margin-top: 10px !important;
-        }
-
-        .form-control-label,
-        input,
-        input::-webkit-input-placeholder {
-            font-size: 10px !important;
-        }
-
-        input {
-            height: 42px !important;
-        }
-
-        .form-group {
-            margin-bottom: 10px !important;
-        }
-    }
-
-    @media only screen and (orientation: landscape) and (max-device-width: 900px) {
-
-        .form-control-label,
-        input,
-        input::-webkit-input-placeholder {
-            font-size: 1.4vw !important;
-        }
-
-        input {
-            height: 5vw !important;
-        }
+@media only screen and (max-width: 768px) {
+    main {
+        height: calc(100% - 77px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

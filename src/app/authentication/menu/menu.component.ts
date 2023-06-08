@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { fromEvent, Subscription } from 'rxjs';
@@ -28,12 +28,17 @@ export class MenuComponent {
 		{ title: "Home", path: APP_ROUTES.root, isExternal: false },
 		{ title: "Products", path: APP_ROUTES.products, isExternal: false },
 		{ title: "Partnership", path: `${environment.myGovernmentOnlineOrg}/partnership/`, isExternal: true },
-		{ title: "Contact", path: APP_ROUTES.products, isExternal: false},
+		{ title: "Contact", path: APP_ROUTES.products, isExternal: false },
 	];
 	route!: string;
 	toggleMenu: boolean = false;
+	logoWidth: number = 700;
+	logoheight: number = 67;
+	hamburgerIconWidth: number = 40;
+	hamburgerIconHeight: number = 40;
 
 	constructor(private router: Router, private cdr: ChangeDetectorRef) {
+		this.onWindowResize();
 		this.subscription.push(
 			this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
 				this.route = event.url;
@@ -45,6 +50,37 @@ export class MenuComponent {
 				this.removeClass();
 			})
 		);
+	}
+
+	@HostListener('window:resize', ['$event'])
+	onWindowResize() {
+		if (window.innerWidth < 998 && window.innerWidth >= 665) {
+			this.logoWidth = 500;
+			this.logoheight = 48;
+		} else if (window.innerWidth < 665 && window.innerWidth >= 540) {
+			this.logoWidth = 400;
+			this.logoheight = 38;
+		} else if (window.innerWidth < 540 && window.innerWidth >= 435) {
+			this.logoWidth = 300;
+			this.logoheight = 29;
+			this.hamburgerIconWidth = 30;
+			this.hamburgerIconHeight = 30;
+		} else if (window.innerWidth < 435 && window.innerWidth >= 390) {
+			this.logoWidth = 250;
+			this.logoheight = 24;
+			this.hamburgerIconWidth = 30;
+			this.hamburgerIconHeight = 30;
+		} else if (window.innerWidth < 390 && window.innerWidth >= 375) {
+			this.logoWidth = 250;
+			this.logoheight = 24;
+			this.hamburgerIconWidth = 30;
+			this.hamburgerIconHeight = 30;
+		} else if (window.innerWidth < 375 && window.innerWidth >= 320) {
+			this.logoWidth = 225;
+			this.logoheight = 22;
+			this.hamburgerIconWidth = 28;
+			this.hamburgerIconHeight = 28;
+		}
 	}
 
 	// onMenuClick(item: string): void {

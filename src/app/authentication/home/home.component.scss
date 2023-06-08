@@ -1,7 +1,3 @@
-// :host {
-//     height: 100%;
-// }
-
 .auth-options {
     min-width: 280px;
     width: 100%;
@@ -10,19 +6,12 @@
     padding: 0 10px;
 }
 
-.auth-banner {
+.contact-us {
+    font-size: 20px;
+    line-height: 24px;
+    color: #231f20;
 
-}
-
-// ::ng-deep {
-    .contact-us {
-        // font-family: 'Inter';
-        // font-style: normal;
-        // font-weight: 700;
-        font-size: 20px;
-        line-height: 24px;
-
-        /* Black */
-        color: #231F20;
+    a {
+        line-height: 46px;
     }
-// }
+}
