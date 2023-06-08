@@ -23,4 +23,8 @@ export class API_Routes {
     public static get getJurisdictions(): string {
         return this.mobileApiUrl + "helper/getjurisdictions/"; 
     }
+
+    public static get contact(): string {
+        return this.apiBaseUrl + "contactform"; 
+    }
 }

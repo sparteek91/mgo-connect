@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-white p-3">
+<nav class="navbar navbar-expand-lg bg-white py-3 px-5">
     <div class="container-fluid header-fluid p-0">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +18,7 @@
                         </a>
                     </ng-container>
                     <ng-container *ngIf="!item.isExternal">
-                        <a class="nav-link text-xl px-3" [routerLink]="[item.path]" routerLinkActive="active">
+                        <a class="nav-link text-xl px-3" [routerLink]="[item.path]" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
                             <span>{{ item.title }}</span>
                         </a>
                     </ng-container>

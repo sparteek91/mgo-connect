@@ -1,0 +1,27 @@
+// Text Colors
+
+// Primary color variants
+@mixin color($color) {
+    color: $color;
+}
+
+.color_primary {
+    &.v1 { @include color(map-get(map-get($palette, blue), 1)); }
+    &.v2 { @include color(map-get(map-get($palette, blue), 2)); }
+}
+
+// -----------------------------------------------------------------------
+
+// Text Sizes
+@mixin fontSize($size) {
+    font-size: $size;
+}
+
+.font_size {
+    &.vw1 { @include fontSize(map-get($fontSizeVW, 1)); }
+    &.vw2 { @include fontSize(map-get($fontSizeVW, 2)); }
+    &.vw3 { @include fontSize(map-get($fontSizeVW, 3)); }
+    &.vw4 { @include fontSize(map-get($fontSizeVW, 4)); }
+    &.vw5 { @include fontSize(map-get($fontSizeVW, 5)); }
+    &.vw6 { @include fontSize(map-get($fontSizeVW, 6)); }
+}

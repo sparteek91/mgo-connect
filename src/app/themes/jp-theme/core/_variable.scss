@@ -38,7 +38,9 @@ $palette: (
     ),
     blue: (
         1: #1a76b9,
+        2: #222b45,
         4: #eaf6ff,
+        // #222b45
     ),
     gray: (
         1: #425d68,
@@ -71,4 +73,13 @@ $fontSize: (
 	xx-huge: 2rem,          // 32px
 	xxx-huge: 2.125rem,     // 34px
 	mighty: 2.25rem,        // 36px
+);
+
+$fontSizeVW: (
+    1: 1vw,
+    2: 2vw,
+    3: 3vw,
+    4: 4vw,
+    5: 5vw,
+    6: 6vw
 );

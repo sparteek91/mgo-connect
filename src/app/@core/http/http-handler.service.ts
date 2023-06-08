@@ -46,6 +46,11 @@ export class HttpHandlerService {
 		}));
 	}
 
+	// sendContact(contactForm: any) {
+
+	// 	return this.http.post<any>(`${environment.baseApiUrl}/contactform`, contactForm, this.httpOptions);
+	//   }
+
 	post(endPoint: string, payload: any) {
 		return this.http.post<any>(endPoint, payload, this.httpOptions);
 	}

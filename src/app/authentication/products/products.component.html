@@ -1,0 +1,75 @@
+<div>
+    <div class="container-fluid">
+        <div class="row px-5">
+            <div class="col-md-6">
+                <div class="h-100 d-flex align-items-center mgo-left">
+                    <h1 class="font_size vw5 font-bold color_primary v2">
+                        What makes
+                        <br>
+                        <span class="color_primary v1">My Government</span>
+                        <br>
+                        Online (MGO)
+                        <br>
+                        Software different?
+                    </h1>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="text-center">
+                    <img class="pointer img-fluid" src="../../../assets/images/mgo-icon.png"
+                        (click)="!!overviewItem && openVideo(overviewItem)">
+                    <button class="text-2xl btn_primary mt-4" *ngIf="overviewItem"
+                        (click)="openVideo(overviewItem)">Video</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex features border-bottom mx-5" *ngFor="let feature of features" [attr.id]="feature.fragment">
+        <h1 class="main-title">{{feature.title}}</h1>
+        <div class="cards d-flex">
+            <div class="card-wrapper d-flex" *ngFor="let item of feature?.items">
+                <div class="card d-flex">
+                    <div class="feature-image-wrapper">
+                        <img *ngIf="item.imageUrl" class="feature-image" width="200" height="200" [src]="item.imageUrl">
+                    </div>
+                    <h5 class="title">{{item.title}}</h5>
+                    <div class="description">{{item.description}}</div>
+                </div>
+                <!-- <button class="video-btn" *ngIf="item.videoSrc" (click)="openVideo(item)">Video</button>
+                <button class="brochure-btn" *ngIf="item.brochureSrc" (click)="openBrochure(item)">Digital
+                    Brochure</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <p-dialog class="document-dialog" [(visible)]="openModal" [modal]="modal" (onHide)="openModal = false">
+    <p-header *ngIf="isVideo && languages?.length > 1">
+        <span class="language-text">Select Language:</span>
+        <p-dropdown class="language-dropdown" [(ngModel)]="language" (onChange)="onChangeLanguage($event)"
+            [options]="languages">
+        </p-dropdown>
+    </p-header>
+    <iframe id="modalframe" [src]="documentSrc | safe" allowfullscreen></iframe>
+</p-dialog> -->
+
+<!-- <p-toast [styleClass]="'toaster'" position="top-right" key="toast" [baseZIndex]="1000">
+    <ng-template let-message pTemplate="message">
+        <div class="p-flex p-flex-column" style="flex: 1;">
+            <div class="p-text-center">
+                <div>
+                    <i *ngIf="message.severity == 'error'" class="fa fa-exclamation-triangle"
+                        style="font-size: 3rem; color: red;"></i>
+                    <i *ngIf="message.severity == 'success'" class="fas fa-check"
+                        style="font-size: 3rem; color: green;"></i>
+                    <i *ngIf="message.severity == 'info'" class="fas fa-info" style="font-size: 3rem; color: blue;"></i>
+                    <span style="padding-left: 15px; padding-bottom: 10px; font-size: 2rem;">{{message.summary}}</span>
+                </div>
+                <div [ngStyle]="{'overflow-y': toastObj && toastObj.sticky ? 'scroll' : 'auto' }"
+                    style="padding-top: 10px; max-height: 300px !important;">
+                    <span [innerHtml]="message.detail" style="white-space: pre-line"></span>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-toast> -->

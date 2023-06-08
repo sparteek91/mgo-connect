@@ -9,37 +9,32 @@ import { AuthWrapperComponent } from './auth-wrapper/auth-wrapper.component';
 import { HomeLoginComponent } from './home/home.component';
 import { LoggedInAuthGuard } from '../@guards/logged-in-auth.guard';
 import { LoginComponent } from './login/login.component';
-// import { ProductsComponent } from './products/products.component';
+import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [{
     path: APP_ROUTES.root,
     component: AuthWrapperComponent,
     children: [
         {
-            path: APP_ROUTES.root,
-            component: HomeLoginComponent,
-            children: [
+            path: APP_ROUTES.root, component: HomeLoginComponent, children: [
                 { path: APP_ROUTES.root, redirectTo: APP_ROUTES.login, pathMatch: 'full' },
                 { path: APP_ROUTES.login, component: LoginComponent, canActivate: [LoggedInAuthGuard] },
-            //     {
-            //         path: 'cplogin',
-            //         component: CustomerPortalLoginOptionComponent,
-            //         canActivate: [LoggedInAuthGuard],
-            //     },
-            //     {
-            //         path: 'forgotPassword',
-            //         component: ForgotPasswordComponent,
-            //     },
-            //     {
-            //         path: 'forgotPasswordVerification',
-            //         component: ForgotPasswordVerificationComponent,
-            //     },
+                //     {
+                //         path: 'cplogin',
+                //         component: CustomerPortalLoginOptionComponent,
+                //         canActivate: [LoggedInAuthGuard],
+                //     },
+                //     {
+                //         path: 'forgotPassword',
+                //         component: ForgotPasswordComponent,
+                //     },
+                //     {
+                //         path: 'forgotPasswordVerification',
+                //         component: ForgotPasswordVerificationComponent,
+                //     },
             ],
         },
-        // {
-        //     path: 'products',
-        //     component: ProductsComponent,
-        // },
+        { path: APP_ROUTES.products, component: ProductsComponent },
         // {
         //     path: 'remoteinspection',
         //     // pathMatch: 'full',

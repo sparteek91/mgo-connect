@@ -14,7 +14,7 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
 // import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 // import { ForgotPasswordVerificationComponent } from './forgot-password-verification/forgot-password-verification.component';
 import { LoginCirclesComponent } from './login-circles/login-circles.component';
-// import { ProductsComponent } from './products/products.component';
+import { ProductsComponent } from './products/products.component';
 import { HomeLoginComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { DialogModule } from 'primeng/dialog';
@@ -53,7 +53,7 @@ import { MenubarModule } from 'primeng/menubar';
 		// ForgotPasswordComponent,
 		// ForgotPasswordVerificationComponent,
 		LoginCirclesComponent,
-		// ProductsComponent,
+		ProductsComponent,
 		HomeLoginComponent,
 		MenuComponent,
 		// CustomerPortalLoginOptionComponent,

@@ -1,16 +1,15 @@
 export class APP_ROUTES {
-  public static root: string = '';
-  public static slash: string = '/';
-  public static previous: string = '../';
-  public static new: string = 'new';
+	public static root: string = '';
+	public static slash: string = '/';
+	public static previous: string = '../';
+	public static new: string = 'new';
 
-  //* auth layout */
-  public static auth: string = 'auth';
-  public static login: string = 'login';
-  public static signup: string = 'signup';
-  public static forgotPassword: string = 'forgot-password';
-  public static products: string = 'products';
+	//* auth layout */
+	public static auth: string = 'auth';
+	public static login: string = 'login';
+	public static signup: string = 'signup';
+	public static forgotPassword: string = 'forgot-password';
 
-  public static cp: string = 'cp';
-  
+	public static cp: string = 'cp';
+	public static products: string = 'products';
 }

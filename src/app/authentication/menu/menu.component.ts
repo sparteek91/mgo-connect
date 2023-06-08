@@ -25,10 +25,10 @@ export class MenuComponent {
 	lastScroll = 0;
 	// activeItem: menuItems = menuItems.home;
 	loginMenu = [
-		{ title: "Home", path: APP_ROUTES.root, isExternal: false },
+		{ title: "Home", path: APP_ROUTES.login, isExternal: false },
 		{ title: "Products", path: APP_ROUTES.products, isExternal: false },
 		{ title: "Partnership", path: `${environment.myGovernmentOnlineOrg}/partnership/`, isExternal: true },
-		{ title: "Contact", path: APP_ROUTES.products, isExternal: false },
+		{ title: "Contact", path: `${environment.myGovernmentOnlineOrg}/#contactus`, isExternal: true },
 	];
 	route!: string;
 	toggleMenu: boolean = false;
@@ -42,12 +42,13 @@ export class MenuComponent {
 		this.subscription.push(
 			this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
 				this.route = event.url;
+				console.log(this.route);
 				// if (event.url.includes('/auth/products')) {
 				// 	this.activeItem = menuItems.products;
 				// } else if (event.url.includes('/auth/login')) {
 				// 	this.activeItem = menuItems.home;
 				// }
-				this.removeClass();
+				// this.removeClass();
 			})
 		);
 	}
