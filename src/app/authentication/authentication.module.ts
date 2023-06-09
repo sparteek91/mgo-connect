@@ -19,7 +19,7 @@ import { HomeLoginComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
-// import { SafePipe } from 'app/@theme/pipes';
+import { SafePipe } from "../@pipes/sanitizer.pipe";
 import { MenuService } from './menu/menu.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { CommonModule } from '@angular/common';
@@ -57,7 +57,7 @@ import { MenubarModule } from 'primeng/menubar';
 		HomeLoginComponent,
 		MenuComponent,
 		// CustomerPortalLoginOptionComponent,
-		// SafePipe, //TODO, fix issue with pipes
+		SafePipe, //TODO, fix issue with pipes
 	],
 	providers: [
 		MessageService,

@@ -36,7 +36,7 @@ export class HttpHandlerService {
 		return url + queryString;
 	}
 
-	get(endPoint: string, flag: string = ''): Observable<any> {
+	public get(endPoint: string, flag: string = ''): Observable<any> {
 		return this.http.get(endPoint, this.httpOptions).pipe(map((data: any) => {
 			console.log("data", data);
 			if (flag == 'WorkOrderOffline') {
@@ -46,13 +46,15 @@ export class HttpHandlerService {
 		}));
 	}
 
-	// sendContact(contactForm: any) {
-
-	// 	return this.http.post<any>(`${environment.baseApiUrl}/contactform`, contactForm, this.httpOptions);
-	//   }
-
-	post(endPoint: string, payload: any) {
-		return this.http.post<any>(endPoint, payload, this.httpOptions);
+	public post(endPoint: string, payload: any): Observable<any> {
+		debugger
+		return this.http.post<any>(endPoint, payload, this.httpOptions).pipe(
+			map((data) => {
+				debugger
+				console.log("data", data);
+				return data;
+			})
+		);
 	}
 }
 

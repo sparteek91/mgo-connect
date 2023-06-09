@@ -73,9 +73,10 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	contactUs() {
+		console.log("sadasdasdasdasd")
 		this.formSubmitAttempt = true;
 
-		if (!this.disabledBtn && this.contactForm.valid) {
+		// if (!this.disabledBtn && this.contactForm.valid) {
 			this.httpService.post(API_Routes.contact, this.contactForm.value).subscribe({
 				next: (message: any) => {
 					this.showMessage('Success!', message, 'success', 4000);
@@ -92,7 +93,7 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
 			setTimeout(() => {
 				this.disabledBtn = false;
 			}, 30000);
-		}
+		// }
 	}
 
 	showMessage(summary: string, message: string, severity: string, duration: number, closable: boolean = false, sticky: boolean = false) {

@@ -6,10 +6,6 @@
     $hover-background,
     $hover-border,
     $hover-color,
-    $active-background,
-    $active-border,
-    $active-color,
-    $active-border-width,
     $disabled-background,
     $disabled-border,
     $disabled-color,
@@ -36,13 +32,6 @@
         background-color: $disabled-background;
         border-color: $disabled-border;
     }
-
-    &:active {
-        color: $active-color;
-        background-color: $active-background;
-        border-color: $active-border;
-        border: $active-border-width;
-    }
 }
 
 .btn_primary_outline {
@@ -57,11 +46,6 @@
         map-get(map-get($palette, white), 1),
         map-get(map-get($palette, blue), 1),
         map-get(map-get($palette, blue), 1),
-        // active
-        map-get(map-get($palette, white), 1),
-        map-get(map-get($palette, blue), 1),
-        map-get(map-get($palette, blue), 1),
-        $border-thick,
         // disabled
         map-get(map-get($palette, white), 1),
         map-get(map-get($palette, blue), 1),
@@ -84,11 +68,6 @@
         map-get(map-get($palette, blue), 1),
         map-get(map-get($palette, white), 1),
         map-get(map-get($palette, white), 1),
-        // active
-        map-get(map-get($palette, blue), 1),
-        map-get(map-get($palette, white), 1),
-        map-get(map-get($palette, white), 1),
-        $border-thin,
         // disabled
         map-get(map-get($palette, blue), 1),
         map-get(map-get($palette, white), 1),
