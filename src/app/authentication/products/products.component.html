@@ -28,8 +28,8 @@
             'border-bottom': i < features.length - 1
         }">
             <h1 class="main-title">{{feature.title}}</h1>
-            <div class="cards d-flex">
-                <div class="card-wrapper d-flex" *ngFor="let item of feature?.items">
+            <div class="d-flex justify-content-center align-items-stretch flex-wrap">
+                <div class="mb-5 d-flex align-items-stretch flex-column" *ngFor="let item of feature?.items">
                     <div class="card d-flex">
                         <div class="feature-image-wrapper">
                             <img *ngIf="item.imageUrl" [alt]="item.title" class="feature-image" width="200" height="200" [src]="item.imageUrl">
