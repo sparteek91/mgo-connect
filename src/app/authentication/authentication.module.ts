@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { TabViewModule } from 'primeng/tabview';
+// import { TabViewModule } from 'primeng/tabview';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
-import { TooltipModule } from 'primeng/tooltip';
-import { AccordionModule } from 'primeng/accordion';
-import { TableModule } from 'primeng/table';
+// import { ConfirmationService } from 'primeng/api';
+// import { TooltipModule } from 'primeng/tooltip';
+// import { AccordionModule } from 'primeng/accordion';
+// import { TableModule } from 'primeng/table';
 import { LoginComponent } from './login/login.component';
 import { AuthWrapperComponent } from './auth-wrapper/auth-wrapper.component';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
@@ -27,7 +27,7 @@ import { CommonModule } from '@angular/common';
 // import { SharedModule } from 'app/shared/shared.module';
 // import { CustomerPortalLoginOptionComponent } from './customer-portal-login-option/customer-portal-login-option.component';
 import { MessageService } from 'primeng/api';
-import { MenubarModule } from 'primeng/menubar';
+// import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
 	imports: [
@@ -36,15 +36,15 @@ import { MenubarModule } from 'primeng/menubar';
 		AuthenticationRoutingModule,
 		CommonModule,
 		// ElementsModule,
-		TabViewModule,
+		// TabViewModule,
 		ConfirmDialogModule,
-		TooltipModule,
-		AccordionModule,
-		TableModule,
+		// TooltipModule,
+		// AccordionModule,
+		// TableModule,
 		DialogModule,
 		ToastModule,
 		DropdownModule,
-		MenubarModule
+		// MenubarModule
 		// SharedModule
 	],
 	declarations: [
@@ -61,7 +61,7 @@ import { MenubarModule } from 'primeng/menubar';
 	],
 	providers: [
 		MessageService,
-		ConfirmationService,
+		// ConfirmationService,
 		MenuService,
 	],
 })

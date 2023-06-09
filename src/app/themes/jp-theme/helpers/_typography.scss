@@ -25,3 +25,15 @@
     &.vw5 { @include fontSize(map-get($fontSizeVW, 5)); }
     &.vw6 { @include fontSize(map-get($fontSizeVW, 6)); }
 }
+
+// ------------------------------------------------------------------------
+
+// Background color
+@mixin bgColor($bgColor) {
+    background-color: $bgColor;
+}
+
+.bg {
+    &.white { @include bgColor(map-get(map-get($palette, white), 1)) }
+}
+// --------------------------------------------------------------------------
