@@ -12,5 +12,5 @@ export const environment = {
   myProjectNowOrg: 'https://www.myprojectnow.org',
   geoMyGovernmentonlineOrg: `https://geo.mygovernmentonline.org`,
   assetsMgoconnectOrg: 'https://assets.mgoconnect.org',
-  
+  env: "prod"
 };

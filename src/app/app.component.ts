@@ -8,6 +8,7 @@ import { UserService } from './@core/mock/users.service';
 import { AuthHandlerService } from './@core/http/auth-handler.service';
 // import { LocalStorageService } from './@core/http/local-storage.service';
 import { API_Routes } from './@routes';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-root',
@@ -46,6 +47,7 @@ export class AppComponent {
 	}
 
 	ngOnInit(): void {
+		console.log(environment);
 		if (this.userService.getCurrentUser()) {
 			this.prepWorkOrdersOffline();
 		}

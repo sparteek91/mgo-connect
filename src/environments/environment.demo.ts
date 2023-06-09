@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   baseApiUrl: 'https://api.mgoconnect.org',
   localApiUrl: 'https://localhost:44307',
   myPermitNowUrl: 'https://www.mypermitnow.org',
@@ -12,4 +12,5 @@ export const environment = {
   myProjectNowOrg: 'https://www.myprojectnow.org',
   geoMyGovernmentonlineOrg: `https://geo.mygovernmentonline.org`,
   assetsMgoconnectOrg: 'https://assets.mgoconnect.org',
+  env: "demo"
 };
