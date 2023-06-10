@@ -19,6 +19,7 @@ body {
 	font-size: map-get($fontSize, regular);
     margin: 0;
 	padding: 0;
+    padding-top: 92px;
     font-weight: 400;
     line-height: 1.5;
     color: map-get(map-get($palette, black), 1);

@@ -1,29 +1,26 @@
-import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
+import { ChangeDetectorRef, Component, HostBinding, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { fromEvent, Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { MenuService } from './menu.service';
+import { distinctUntilChanged, filter, map, pairwise, share, throttleTime } from 'rxjs/operators';
+// import { MenuService } from './menu.service';
 import { APP_ROUTES } from "../../@routes";
+import { VisibilityState, Direction, Animations } from "../../@animation/animations";
 
-// enum menuItems {
-// 	home = 'Home',
-// 	products = 'Products',
-// 	partnership = 'Partnership',
-// 	contact = 'Contact'
-// }
 
 @Component({
 	selector: 'app-menu',
 	templateUrl: './menu.component.html',
-	styleUrls: ['./menu.component.scss']
+	styleUrls: ['./menu.component.scss'],
+	animations: [
+		Animations.menu
+	]
 })
 
 export class MenuComponent {
 	routes: any = APP_ROUTES;
 	subscription: Subscription[] = [];
 	lastScroll = 0;
-	// activeItem: menuItems = menuItems.home;
 	loginMenu = [
 		{ title: "Home", path: APP_ROUTES.login, isExternal: false },
 		{ title: "Products", path: APP_ROUTES.products, isExternal: false },
@@ -31,11 +28,11 @@ export class MenuComponent {
 		{ title: "Contact", path: `${environment.myGovernmentOnlineOrg}/#contactus`, isExternal: true },
 	];
 	route!: string;
-	toggleMenu: boolean = false;
 	logoWidth: number = 700;
 	logoheight: number = 67;
 	hamburgerIconWidth: number = 40;
 	hamburgerIconHeight: number = 40;
+	private isVisible = true;
 
 	constructor(private router: Router, private cdr: ChangeDetectorRef) {
 		this.onWindowResize();
@@ -84,80 +81,31 @@ export class MenuComponent {
 		}
 	}
 
-	// onMenuClick(item: string): void {
-	// 	switch (item) {
-	// 		case menuItems.contact:
-	// 			this.menuService.setFragment('contactUs');
-	// 			this.router.navigate(['/auth/products'], { state: { data: 'contactUs' } });
-	// 			break;
-	// 		case menuItems.partnership:
-	// 			window.open(`${environment.myGovernmentOnlineOrg}/partnership/`, '_blank')
-	// 			break;
-	// 		case menuItems.products:
-	// 			this.activeItem = item;
-
-	// 			this.menuService.setFragment('');
-	// 			this.router.navigate(['/auth/products']);
-	// 			break;
-	// 		case menuItems.home:
-	// 			this.activeItem = item;
-
-	// 			this.router.navigate(['/auth/login']);
-	// 			break;
-	// 	}
-	// }
-
-	toggleMenuAction(): void {
-		this.toggleMenu = !this.toggleMenu;
-		this.cdr.markForCheck();
+	@HostBinding('@toggle')
+	get toggle(): VisibilityState {
+		return this.isVisible ? VisibilityState.Visible : VisibilityState.Hidden;
 	}
 
 	ngAfterViewInit() {
-		const element: any = document.querySelector('.scrollable-container');
-		this.subscription.push(
-			fromEvent(element, 'scroll').subscribe(e => {
-				if (window.innerWidth > 991) {
-					this.handleScroll(element);
-				}
-			})
+		const scroll$ = fromEvent(window, 'scroll').pipe(
+			throttleTime(10),
+			map(() => window.pageYOffset),
+			pairwise(),
+			map(([y1, y2]): Direction => (y2 < y1 ? Direction.Up : Direction.Down)),
+			distinctUntilChanged(),
+			share()
 		);
-	}
 
-	handleScroll(scrollableElement: any) {
-		const menu = document.querySelector('.menu');
-		const scrollUp = 'scroll-up';
-		const scrollDown = 'scroll-down';
+		const goingUp$ = scroll$.pipe(
+			filter(direction => direction === Direction.Up)
+		);
 
-		const currentScroll = scrollableElement.scrollTop;
-		if (currentScroll <= 0) {
-			menu?.classList.remove(scrollUp);
-			return;
-		}
+		const goingDown$ = scroll$.pipe(
+			filter(direction => direction === Direction.Down)
+		);
 
-		if (currentScroll > this.lastScroll && !menu?.classList.contains(scrollDown)) {
-			// down
-			menu?.classList.remove(scrollUp);
-			menu?.classList.add(scrollDown);
-		} else if (
-			currentScroll < this.lastScroll &&
-			menu?.classList.contains(scrollDown)
-		) {
-			// up
-			menu?.classList.remove(scrollDown);
-			menu?.classList.add(scrollUp);
-		}
-		this.lastScroll = currentScroll;
-	}
-
-	removeClass() {
-		const menu = document.querySelector('.menu');
-		const scrollDown = 'scroll-down';
-		const scrollUp = 'scroll-up';
-
-		if (menu?.classList) {
-			menu?.classList.remove(scrollDown);
-			menu?.classList.remove(scrollUp);
-		}
+		goingUp$.subscribe(() => (this.isVisible = true));
+		goingDown$.subscribe(() => (this.isVisible = false));
 	}
 
 	ngOnDestroy() {
