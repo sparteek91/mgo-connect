@@ -10,6 +10,10 @@
     &.v2 { @include color(map-get(map-get($palette, blue), 2)); }
 }
 
+.color_muted {
+    @include color(map-get(map-get($palette, gray), 2));
+}
+
 // -----------------------------------------------------------------------
 
 // Text Sizes

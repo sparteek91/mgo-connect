@@ -30,13 +30,20 @@
         }
     }
 
-    @media only screen and (max-width: 1024px) {
+    @media only screen and (max-width: 992px) {
         padding: 1rem 0.5rem;
+        display: block;
 
         .header-fluid {
             width: auto;
             margin-right: unset;
             margin-left: unset;
+            justify-content: unset;
+
+            .navbar-nav {
+                margin-top: 20px;
+                text-align: center;
+            }
         }
     }
 

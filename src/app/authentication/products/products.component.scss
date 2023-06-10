@@ -39,25 +39,21 @@ button {
     margin: 30px;
     padding: 30px;
     height: 690px;
+    
+    .description {
+        font-size: 18px;
+        line-height: 28px;
+    }
+    
+    .title {
+        font-size: 24px;
+    }
 }
 
-.description {
-    color: #757575;
-    font-size: 18px;
-    line-height: 28px;
-    font-family: "Raleway", sans-serif !important;
-}
-
-.title {
-    font-size: 24px;
-    font-family: "Raleway", sans-serif !important;
-    margin: 15px 0;
-}
 
 .main-title {
     color: #666;
     text-align: center;
-    font-family: "Raleway", sans-serif !important;
 
     @media (min-width: 1480px) {
         font-size: 50px;
