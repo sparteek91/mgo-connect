@@ -1,23 +1,7 @@
 @import "../../themes/jp-theme/core/variable";
 
-// :host {
-//     height: 90px;
-
-//     @media (min-width: 1800px) {
-//         height: 150px;
-//     }
-
-//     @media (min-width: 1600px) and (max-width: 1800px) {
-//         height: 130px;
-//     }
-
-//     @media (min-width: 1400px) and (max-width: 1600px) {
-//         height: 110px;
-//     }
-// }
-
-
 .navbar {
+    padding: 1rem 3rem;
 
     .navbar-toggler {
         border: 0;
@@ -46,21 +30,15 @@
         }
     }
 
-    @media only screen and (max-width: 992px) {
+    @media only screen and (max-width: 1024px) {
+        padding: 1rem 0.5rem;
+
         .header-fluid {
             width: auto;
             margin-right: unset;
             margin-left: unset;
         }
     }
-
-    // @media only screen and (max-width: 768px) {
-    //     .navbar-brand {
-    //         img {
-    //             width: 100%;
-    //         }
-    //     }
-    // }
 
     @media only screen and (max-width: 425px) {
         .navbar-toggler {

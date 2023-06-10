@@ -7,8 +7,7 @@
     "build": "[ -f src/aws-exports.js] && mv src/aws-exports.js src/aws-exports.ts || ng build; ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "postbuild": "node purge-css.js",
-    "poststart": "node purge-css.js"
+    "postbuild": "node purge-css.js"
   },
   "private": true,
   "dependencies": {
