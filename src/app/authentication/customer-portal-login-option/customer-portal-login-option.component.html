@@ -1,0 +1,41 @@
+<div class="login">
+    <div style="background: transparent; padding: 0;">
+        <h2 class="font-bold mb-4">Customer Portal Login</h2>
+        <form [formGroup]="jurisdictionForm">
+            <div style="display: flex; gap: 15px;" class="mb-3">
+                <p-dropdown [options]="countries" name="countries" formControlName="selectedCountry"
+                    styleClass="w-100 mw-128px">
+                </p-dropdown>
+
+                <p-dropdown [options]="states" filterMatchMode="startsWith" formControlName="State"
+                    placeholder="Select a State" optionLabel="State" searchOptionInRange
+                    (onChange)="onChangeState($event)" [filter]="true" styleClass="w-10" [style]="{'width': '100%'}">
+                </p-dropdown>
+                
+            </div>
+            <div class="d-flex mb-3">
+                <p-dropdown [options]="jurisdictions" filterMatchMode="startsWith" formControlName="Jurisdiction"
+                    placeholder="Select a Jurisdiction" optionLabel="Jurisdiction" [filter]="true"
+                    styleClass="ui-column-filter stateStyleLarge stateStyleHeight" [style]="{'width': '100%'}">
+                </p-dropdown>
+            </div>
+            <div class="d-flex mb-3">
+                <button type="button" [disabled]="!jurisdictionForm.valid" (click)="goContinue()"
+                    class="btn_primary w-100">
+                    <img style="height: 37px;" src="../../../assets/icons/right-arrow-svg.svg" /> GO
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="downBox">
+        <a href="https://apps.apple.com/us/app/mgo-connect/id1458772737" target="_blank" style="margin-right: 16px;">
+            <img alt="app-store" src="./../../../assets/images/app-store.png" />
+        </a>
+
+        <a href="https://play.google.com/store/apps/details?id=com.mgoconnect" target="_blank"
+            style="margin-right: 16px;">
+            <img alt="g-play" src="./../../../assets/images/g-play.png" />
+        </a>
+    </div>
+</div>

@@ -25,7 +25,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CommonModule } from '@angular/common';
 // import { ElementsModule } from 'app/@theme/elements/elements.module';
 // import { SharedModule } from 'app/shared/shared.module';
-// import { CustomerPortalLoginOptionComponent } from './customer-portal-login-option/customer-portal-login-option.component';
+import { CustomerPortalLoginOptionComponent } from './customer-portal-login-option/customer-portal-login-option.component';
 import { MessageService } from 'primeng/api';
 // import { MenubarModule } from 'primeng/menubar';
 
@@ -56,7 +56,7 @@ import { MessageService } from 'primeng/api';
 		ProductsComponent,
 		HomeLoginComponent,
 		MenuComponent,
-		// CustomerPortalLoginOptionComponent,
+		CustomerPortalLoginOptionComponent,
 		SafePipe, //TODO, fix issue with pipes
 	],
 	providers: [

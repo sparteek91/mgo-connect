@@ -1,12 +1,12 @@
 <div *ngIf="shouldRenderLoginPage" class="login">
-    <button type="button" [routerLink]="['/auth/cplogin']" class="d-flex justify-content-center align-items-center btn_primary mb-3">
+    <a [routerLink]="[routes.cpLogin]" [relativeTo]="route.parent" class="btn d-flex justify-content-center align-items-center btn_primary mb-3">
         <img width="25" height="29" src="../../../assets/icons/customer-outline.svg" class="me-2">
         Customer Portal
-    </button>
-    <button type="button" (click)="onSubmit()" class="d-flex justify-content-center align-items-center btn_primary">
+    </a>
+    <a (click)="onSubmit()" class="btn d-flex justify-content-center align-items-center btn_primary">
         <img width="38" height="39" src="../../../assets/icons/city.svg" class="me-2">
         Jurisdiction Portal
-    </button>
+    </a>
 
     <div class="downBox">
         <a href="https://apps.apple.com/us/app/mgo-connect/id1458772737" target="_blank" style="margin-right: 16px;">

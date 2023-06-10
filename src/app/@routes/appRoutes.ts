@@ -7,6 +7,7 @@ export class APP_ROUTES {
 	//* auth layout */
 	public static auth: string = 'auth';
 	public static login: string = 'login';
+	public static cpLogin: string = 'cplogin';
 	public static signup: string = 'signup';
 	public static forgotPassword: string = 'forgot-password';
 

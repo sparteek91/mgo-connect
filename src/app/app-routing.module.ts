@@ -5,7 +5,7 @@ import { APP_ROUTES } from "./@routes";
 
 const routes: Routes = [
 	{
-		path: APP_ROUTES.root,
+		path: APP_ROUTES.auth,
 		loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule),
 	},
 	{

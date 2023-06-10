@@ -3,7 +3,7 @@
     flex-direction: column;
     text-align-last: left;
 
-    button {
+    a {
         line-height: 46px;
     }
 
@@ -11,15 +11,15 @@
         border-radius: 6px;
     }
     
-    .downBox img {
-        height: 47px;
-        width: 100%;
-    }
-    
     .downBox {
         margin-top: 65px;
         margin-bottom: 65px;
         display: flex;
         justify-content: center;
+        
+        img {
+            height: 47px;
+            width: 100%;
+        }
     }
 }
