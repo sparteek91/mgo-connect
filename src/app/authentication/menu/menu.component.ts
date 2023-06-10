@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, HostBinding, HostListener } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Component, HostBinding, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { fromEvent, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, pairwise, share, throttleTime } from 'rxjs/operators';
@@ -12,9 +12,7 @@ import { VisibilityState, Direction, Animations } from "../../@animation/animati
 	selector: 'app-menu',
 	templateUrl: './menu.component.html',
 	styleUrls: ['./menu.component.scss'],
-	animations: [
-		Animations.menu
-	]
+	animations: [Animations.menu]
 })
 
 export class MenuComponent {
@@ -34,20 +32,8 @@ export class MenuComponent {
 	hamburgerIconHeight: number = 40;
 	private isVisible = true;
 
-	constructor(private router: Router, private cdr: ChangeDetectorRef) {
+	constructor(private router: Router) {
 		this.onWindowResize();
-		this.subscription.push(
-			this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
-				this.route = event.url;
-				console.log(this.route);
-				// if (event.url.includes('/auth/products')) {
-				// 	this.activeItem = menuItems.products;
-				// } else if (event.url.includes('/auth/login')) {
-				// 	this.activeItem = menuItems.home;
-				// }
-				// this.removeClass();
-			})
-		);
 	}
 
 	@HostListener('window:resize', ['$event'])

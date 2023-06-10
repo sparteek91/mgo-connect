@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { StorageData } from "../models/storageValue.model";
 // import { UserService } from '../mock/users.service';
@@ -12,15 +12,18 @@ import { StorageData } from "../models/storageValue.model";
 })
 
 export class HttpHandlerService {
-	httpOptions = {
-		headers: new HttpHeaders({
-			'Content-Type': 'application/json',
-		})
-	};
+	// httpOptions = {
+	// 	headers: new HttpHeaders({
+	// 		'Content-Type': 'application/json',
+	// 	})
+	// };
 	readonly #data = new BehaviorSubject<StorageData[]>([]);
 	data$ = this.#data.asObservable();
+	private noAuthHttp: HttpClient;
 
-	constructor(private http: HttpClient) { }
+	constructor(private readonly http: HttpClient, private readonly backend: HttpBackend) {
+		this.noAuthHttp = new HttpClient(this.backend);
+	}
 
 	public formUrlParam(url: string, data: any): string {
 		let queryString: string = '';
@@ -36,25 +39,45 @@ export class HttpHandlerService {
 		return url + queryString;
 	}
 
-	public get(endPoint: string, flag: string = ''): Observable<any> {
-		return this.http.get(endPoint, this.httpOptions).pipe(map((data: any) => {
-			console.log("data", data);
-			if (flag == 'WorkOrderOffline') {
-				getWorkOrderOffline.data = data;
+	public get(endPoint: string, flag: string = '', isAuth: boolean): Observable<any> {
+		let http: HttpClient;
+		if (!isAuth) {
+			http = this.noAuthHttp;
+		} else {
+			http = this.http;
+		}
+		return http.get(endPoint).pipe(map((data: any) => {
+			if (flag) {
+				this.populateConst(data, flag)
 			}
 			return data;
 		}));
 	}
 
 	public post(endPoint: string, payload: any): Observable<any> {
-		debugger
-		return this.http.post<any>(endPoint, payload, this.httpOptions).pipe(
+		return this.http.post<any>(endPoint, payload).pipe(
 			map((data) => {
-				debugger
-				console.log("data", data);
 				return data;
 			})
 		);
+	}
+
+	public forkJoin(urls: any[]): Observable<any> {
+		let response: any = [];
+		for (let i = 0; i < urls.length; i++) {
+			if (!urls[i].isAuth) {
+				response.push(this.noAuthHttp.get(urls[i].path));
+			} else {
+				response.push(this.http.get(urls[i].path));
+			}
+		}
+		return forkJoin(response);
+	}
+
+	private populateConst(data: any, flag: string): void {
+		if (flag == 'WorkOrderOffline') {
+			getWorkOrderOffline.data = data;
+		}
 	}
 }
 

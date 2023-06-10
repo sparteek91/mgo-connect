@@ -30,11 +30,7 @@ import { SignalrService } from "./@core/http/signalr.service";
 		UserService,
 		AuthGuard,
 		LoggedInAuthGuard,
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: AuthInterceptor,
-			multi: true
-		},
+		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 		//  { provide: HTTP_INTERCEPTORS, useClass: NotificationInterceptor, multi: true },
 		// SignalrService,

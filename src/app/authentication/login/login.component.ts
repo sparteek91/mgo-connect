@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 	allDataJurisdiction: any;
 	jurisdictions: any;
 	states: any;
-
 	countries: any[] = [];
 
 	constructor(
@@ -42,7 +41,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 		private frameService: FrameService,
 		private dataLocalService: DataLocalService
 	) {
-
 		Hub.listen("auth", ({ payload: { event, data } }) => {
 			switch (event) {
 				case "signIn":
@@ -62,26 +60,23 @@ export class LoginComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	ngOnInit() {
-		Auth.currentSession()
-			.then(user => this.redirectToLandingPage(user))
-			.catch((err) => this.shouldRenderLoginPage = true);
-
-		this.getDataState();
-		this.getDataJurisdiction();
-
+	ngOnInit(): void {
+		Auth.currentSession().then((user: any) => {
+			console.log("user", user);
+			this.redirectToLandingPage(user)
+		}).catch((err) => this.shouldRenderLoginPage = true);
+		this.getStateAndJurisdiction();
 		this.initForm();
-
 		this.countries.push({ label: 'US', value: 1 });
 		this.jurisdictionForm.controls['selectedCountry'].setValue(1);
 	}
 
-	ngOnDestroy() {
+	ngOnDestroy(): void {
 		this.accountDisabled = false;
 		this.passwordChanged = false;
 	}
 
-	initForm() {
+	private initForm(): void {
 		this.jurisdictionForm = this.fb.group({
 			State: ['', Validators.required],
 			Jurisdiction: ['', Validators.required],
@@ -89,12 +84,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	async onSubmit() {
+	async onSubmit(): Promise<any> {
 		await Auth.federatedSignIn()
 	}
 
-	redirectToLandingPage(user: any) {
-
+	private redirectToLandingPage(user: any): void {
 		let queryParams = sessionStorage.getItem('raw-state-url');
 		if (queryParams) {
 			sessionStorage.removeItem('raw-state-url');
@@ -115,11 +109,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this.router.navigate(['/auth/forgotPassword']);
 	}
 
-	async prepWorkOrdersOffline(loggedInUser: any) {
+	private async prepWorkOrdersOffline(loggedInUser: any): Promise<any> {
 		let dateToday = this.frameService.formatDate(new Date());
 		let selectedInspector = loggedInUser.UserID.toString();
 		const endPoint: string = this.httpService.formUrlParam(`${API_Routes.prepoffline + selectedInspector}`, { Start: dateToday, End: dateToday });
-		this.httpService.get(endPoint, "WorkOrderOffline").subscribe((res: any) => {
+		this.httpService.get(endPoint, "WorkOrderOffline", true).subscribe((res: any) => {
 			localStorage.setItem('offlineWorkOrders', JSON.stringify(res));
 		}, (error: any) => {
 			this.frameService.showToastPrime('Error!', 'An error ocurred while fetching work orders.', 'error', 4000);
@@ -134,24 +128,29 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this.getDataJurisdictionByStateId(event.value.StateID);
 	}
 
-	getDataState(): void {
-		this.httpService.get(`${API_Routes.getStates}/-`).subscribe((res: any) => {
-			this.states = res;
+	private getStateAndJurisdiction(): void {
+		const urls: any[] = [
+			{ path: `${API_Routes.getStates}/-`, flag: '', isAuth: false },
+			{ path: `${API_Routes.getJurisdictions}/-`, flag: '', isAuth: false },
+		];
+		this.httpService.forkJoin(urls).subscribe(res => {
+			if (res.length) {
+				this.states = res[0];
+				this.allDataJurisdiction = res[1];
+				console.log("states", this.states);
+				console.log("allDataJurisdiction", this.allDataJurisdiction);
+			}
+		}, (err: any) => {
+			console.log(err);
 		});
 	}
 
-	getDataJurisdiction(): void {
-		this.httpService.get(`${API_Routes.getJurisdictions}/-`).subscribe((res: any) => {
-			this.allDataJurisdiction = res;
-		});
-	}
-
-	getDataJurisdictionByStateId(stateId: string) {
+	private getDataJurisdictionByStateId(stateId: string): void {
 		const fvData = this.allDataJurisdiction.filter((x: any) => x.StateID === stateId);
 		this.jurisdictions = fvData;
 	}
 
-	goContinue() {
+	goContinue(): void {
 		localStorage.setItem('CPJurisdiction', this.jurisdictionForm.value.Jurisdiction.Jurisdiction);
 		localStorage.setItem('CPJurisdictionID', this.jurisdictionForm.value.Jurisdiction.JurisdictionID);
 		localStorage.setItem('CPState', this.jurisdictionForm.value.State.StateID);

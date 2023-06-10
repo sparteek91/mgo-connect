@@ -1,5 +1,5 @@
 
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Auth } from 'aws-amplify';
 
@@ -22,25 +22,21 @@ export class AuthInterceptor implements HttpInterceptor {
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-		return from(Auth.currentSession())
-			.pipe(
-				switchMap((auth: any) => { // switchMap() is used instead of map().
-
-					let jwt = auth.accessToken.jwtToken;
-					let with_auth_request = request.clone({
-						setHeaders: {
-							Authorization: `Bearer ${jwt}`
-						}
-					});
-					localStorage.setItem('JPToken', JSON.stringify(auth.accessToken.jwtToken));
-					return next.handle(with_auth_request);
-				}),
-				// catchError((err) => {
-				//     console.log("Error ", err);
-				//     return next.handle(request);
-				// })
-			);
-
+		return from(Auth.currentSession()).pipe(
+			switchMap((auth: any) => { // switchMap() is used instead of map().
+				const jwt = auth.accessToken.jwtToken;
+				request = request.clone({
+					setHeaders: {
+						Authorization: `Bearer ${jwt}`
+					}
+				});
+				localStorage.setItem('JPToken', JSON.stringify(auth.accessToken.jwtToken));
+				return next.handle(request);
+			}),
+			// catchError((err) => {
+			//     console.log("Error ", err);
+			//     return next.handle(request);
+			// })
+		);
 	}
-
 }
