@@ -1,4 +1,4 @@
-import { Component, HostBinding, HostListener } from '@angular/core';
+import { Component, HostBinding, HostListener, ChangeDetectorRef } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { fromEvent, Subscription } from 'rxjs';
@@ -33,10 +33,11 @@ export class MenuComponent {
 	hamburgerIconHeight: number = 40;
 	private isVisible = true;
 
-	constructor(private router: Router) {
+	constructor(private router: Router, private readonly cd: ChangeDetectorRef) {
 		this.onWindowResize();
 		const menuRouteChangeSubs = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
 			this.route = event.url;
+			console.log(this.route)
 			if (event.url.includes(APP_ROUTES.cpLogin)) {
 				this.loginMenu.find(i => i.path == APP_ROUTES.cpLogin).isVisible = true;
 				this.loginMenu.find(i => i.path == APP_ROUTES.login).isVisible = false;
@@ -44,6 +45,7 @@ export class MenuComponent {
 				this.loginMenu.find(i => i.path == APP_ROUTES.cpLogin).isVisible = false;
 				this.loginMenu.find(i => i.path == APP_ROUTES.login).isVisible = true;
 			}
+			this.cd.markForCheck();
 		});
 		this.subscription.add(menuRouteChangeSubs);
 	}

@@ -13,6 +13,7 @@ import { API_Routes, APP_ROUTES } from 'src/app/@routes';
 })
 
 export class CustomerPortalLoginOptionComponent implements OnInit {
+	routes: any = APP_ROUTES;
 	jurisdictionForm!: FormGroup;
 	allDataJurisdiction: any;
 	jurisdictions: any;
