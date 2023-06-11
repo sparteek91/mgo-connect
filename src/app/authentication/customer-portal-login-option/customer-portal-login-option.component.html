@@ -1,22 +1,21 @@
-<div class="login">
+<div class="cp-login">
     <div style="background: transparent; padding: 0;">
         <h2 class="font-bold mb-4">Customer Portal Login</h2>
         <form [formGroup]="jurisdictionForm">
             <div style="display: flex; gap: 15px;" class="mb-3">
                 <p-dropdown [options]="countries" name="countries" formControlName="selectedCountry"
-                    styleClass="w-100 mw-128px">
+                    styleClass="mw-128px dropdown-control w-100">
                 </p-dropdown>
 
                 <p-dropdown [options]="states" filterMatchMode="startsWith" formControlName="State"
                     placeholder="Select a State" optionLabel="State" searchOptionInRange
-                    (onChange)="onChangeState($event)" [filter]="true" styleClass="w-10" [style]="{'width': '100%'}">
+                    (onChange)="onChangeState($event)" [filter]="true" class="w-100" styleClass="dropdown-control w-100">
                 </p-dropdown>
-                
             </div>
             <div class="d-flex mb-3">
                 <p-dropdown [options]="jurisdictions" filterMatchMode="startsWith" formControlName="Jurisdiction"
                     placeholder="Select a Jurisdiction" optionLabel="Jurisdiction" [filter]="true"
-                    styleClass="ui-column-filter stateStyleLarge stateStyleHeight" [style]="{'width': '100%'}">
+                    styleClass="ui-column-filter stateStyleLarge stateStyleHeight dropdown-control w-100" class="w-100">
                 </p-dropdown>
             </div>
             <div class="d-flex mb-3">

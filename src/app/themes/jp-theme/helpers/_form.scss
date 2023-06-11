@@ -1,0 +1,11 @@
+.dropdown-control {
+    &.p-dropdown {
+        border: $border-thin map-get(map-get($palette, gray), 4);
+    
+        .p-dropdown-label {
+            &.p-placeholder {
+                color: map-get(map-get($palette, gray), 2);
+            }
+        }
+    }
+}

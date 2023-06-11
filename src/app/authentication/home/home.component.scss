@@ -16,6 +16,24 @@
     }
 }
 
+::ng-deep {
+    .app-store {
+        border-radius: 6px;
+    }
+    
+    .downBox {
+        margin-top: 65px;
+        margin-bottom: 65px;
+        display: flex;
+        justify-content: center;
+    
+        img {
+            height: 47px;
+            width: 100%;
+        }
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .app-center {
         height: 100%;
