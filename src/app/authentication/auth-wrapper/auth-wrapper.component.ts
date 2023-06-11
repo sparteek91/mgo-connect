@@ -35,6 +35,7 @@ export class AuthWrapperComponent implements OnInit {
 		});
 
 		this.frameService.toast$.subscribe((toast) => {
+			console.log("toast", toast)
 			if (toast) {
 				if (toast.destroyAll) {
 					this.messageService.clear();

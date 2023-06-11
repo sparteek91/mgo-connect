@@ -33,11 +33,10 @@ export class MenuComponent {
 	hamburgerIconHeight: number = 40;
 	private isVisible = true;
 
-	constructor(private router: Router, private readonly cd: ChangeDetectorRef) {
+	constructor(private readonly router: Router, private readonly cd: ChangeDetectorRef) {
 		this.onWindowResize();
 		const menuRouteChangeSubs = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
 			this.route = event.url;
-			console.log(this.route)
 			if (event.url.includes(APP_ROUTES.cpLogin)) {
 				this.loginMenu.find(i => i.path == APP_ROUTES.cpLogin).isVisible = true;
 				this.loginMenu.find(i => i.path == APP_ROUTES.login).isVisible = false;

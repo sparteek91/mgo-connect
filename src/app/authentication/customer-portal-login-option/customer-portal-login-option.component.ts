@@ -54,8 +54,6 @@ export class CustomerPortalLoginOptionComponent implements OnInit {
 				if (res.length) {
 					this.states = res[0];
 					this.allDataJurisdiction = res[1];
-					console.log("states", this.states);
-					console.log("allDataJurisdiction", this.allDataJurisdiction);
 				}
 			},
 			error: (err: any) => console.log(err),
