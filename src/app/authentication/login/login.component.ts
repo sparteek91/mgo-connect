@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 			if (data.MGOConnectDefaultPage != null && data.MGOConnectDefaultPage != "") {
 				this.router.navigate([data.MGOConnectDefaultPage]);
 			}
-			else this.router.navigate(['mgo/projectmanager']);
+			else this.router.navigate([`${APP_ROUTES.mgo}/${APP_ROUTES.projectmanager}`]);
 		}
 		);
 	}

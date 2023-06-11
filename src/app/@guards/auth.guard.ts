@@ -26,7 +26,7 @@ export class AuthGuard {
 
 		}).catch(() => {
 			sessionStorage.setItem('raw-state-url', state.url);
-			this._router.navigate(['/auth/login']);
+			this._router.navigate([`/${APP_ROUTES.auth}/${APP_ROUTES.login}`]);
 			return false;
 		});
 	}

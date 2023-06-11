@@ -14,12 +14,13 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-5 ms-md-0 ms-sm-0">
                 <li class="nav-item" *ngFor="let item of loginMenu">
                     <ng-container *ngIf="item.isExternal">
-                        <a class="nav-link text-xl px-3" [href]="[item.path]" target="_blank">
+                        <a class="nav-link text-xl px-3" [href]="[item.path]" target="_blank" *ngIf="item.isVisible">
                             <span>{{ item.title }}</span>
                         </a>
                     </ng-container>
                     <ng-container *ngIf="!item.isExternal">
-                        <a class="nav-link text-xl px-3" [routerLink]="[item.path]" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
+                        <a class="nav-link text-xl px-3" [routerLink]="[item.path]" *ngIf="item.isVisible" [routerLinkActive]="'active'" 
+                        [routerLinkActiveOptions]="{ exact: true }">
                             <span>{{ item.title }}</span>
                         </a>
                     </ng-container>

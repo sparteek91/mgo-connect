@@ -1,5 +1,5 @@
 import { Component, HostBinding, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { fromEvent, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, pairwise, share, throttleTime } from 'rxjs/operators';
@@ -17,13 +17,14 @@ import { VisibilityState, Direction, Animations } from "../../@animation/animati
 
 export class MenuComponent {
 	routes: any = APP_ROUTES;
-	subscription: Subscription[] = [];
+	subscription: Subscription = new Subscription();
 	lastScroll = 0;
-	loginMenu = [
-		{ title: "Home", path: APP_ROUTES.login, isExternal: false },
-		{ title: "Products", path: APP_ROUTES.products, isExternal: false },
-		{ title: "Partnership", path: `${environment.myGovernmentOnlineOrg}/partnership/`, isExternal: true },
-		{ title: "Contact", path: `${environment.myGovernmentOnlineOrg}/#contactus`, isExternal: true },
+	loginMenu: any[] = [
+		{ title: "Home", path: APP_ROUTES.login, isExternal: false, isVisible: true },
+		{ title: "Home", path: APP_ROUTES.cpLogin, isExternal: false, isVisible: false },
+		{ title: "Products", path: APP_ROUTES.products, isExternal: false, isVisible: true },
+		{ title: "Partnership", path: `${environment.myGovernmentOnlineOrg}/partnership/`, isExternal: true, isVisible: true },
+		{ title: "Contact", path: `${environment.myGovernmentOnlineOrg}/#contactus`, isExternal: true, isVisible: true },
 	];
 	route!: string;
 	logoWidth: number = 700;
@@ -34,6 +35,17 @@ export class MenuComponent {
 
 	constructor(private router: Router) {
 		this.onWindowResize();
+		const menuRouteChangeSubs = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: any) => {
+			this.route = event.url;
+			if (event.url.includes(APP_ROUTES.cpLogin)) {
+				this.loginMenu.find(i => i.path == APP_ROUTES.cpLogin).isVisible = true;
+				this.loginMenu.find(i => i.path == APP_ROUTES.login).isVisible = false;
+			} else if (event.url.includes(APP_ROUTES.login)) {
+				this.loginMenu.find(i => i.path == APP_ROUTES.cpLogin).isVisible = false;
+				this.loginMenu.find(i => i.path == APP_ROUTES.login).isVisible = true;
+			}
+		});
+		this.subscription.add(menuRouteChangeSubs);
 	}
 
 	@HostListener('window:resize', ['$event'])
@@ -95,7 +107,6 @@ export class MenuComponent {
 	}
 
 	ngOnDestroy() {
-		this.subscription.forEach(item => item.unsubscribe());
-		this.subscription = [];
+		this.subscription.unsubscribe()
 	}
 }

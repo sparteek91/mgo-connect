@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { HelperCpService } from 'app/customer-portal/services/helper-cp.service';
 import { HttpHandlerService } from '../../@core/http/http-handler.service';
 import { DataLocalService } from '../../customer-portal/services/data-local.service';
-import { API_Routes } from 'src/app/@routes';
+import { API_Routes, APP_ROUTES } from 'src/app/@routes';
 
 @Component({
 	selector: 'app-customer-portal-login-option',
@@ -20,9 +19,7 @@ export class CustomerPortalLoginOptionComponent implements OnInit {
 	states: any;
 	countries: any[] = [];
 	
-	constructor(private readonly httpService: HttpHandlerService,
-		private readonly dataLocalService: DataLocalService,
-		private readonly router: Router) {
+	constructor(private readonly httpService: HttpHandlerService, private readonly dataLocalService: DataLocalService, private readonly router: Router) {
 
 	}
 
@@ -77,6 +74,6 @@ export class CustomerPortalLoginOptionComponent implements OnInit {
 		localStorage.setItem('CPStateName', this.jurisdictionForm.value.State.State);
 		this.dataLocalService.changeJurisdictionName.next(this.jurisdictionForm.value.Jurisdiction.Jurisdiction);
 		this.dataLocalService.selectedJurisdiction.next(this.jurisdictionForm.value.Jurisdiction);
-		this.router.navigate(['/cp/portal']);
+		this.router.navigate([`/${APP_ROUTES.cp}/${APP_ROUTES.portal}`]);
 	}
 }

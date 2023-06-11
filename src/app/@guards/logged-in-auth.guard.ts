@@ -5,13 +5,13 @@ import { HttpHandlerService } from "../@core/http/http-handler.service"
 import { FrameService } from "../@core/mock/frame.service";
 import { UserService } from "../@core/mock/users.service";
 import { Auth } from "aws-amplify";
-import { API_Routes } from "../@routes";
+import { API_Routes, APP_ROUTES } from "../@routes";
 
 @Injectable()
 
 export class LoggedInAuthGuard {
 
-	constructor(private _router: Router, private authService: AuthHandlerService, private userService: UserService, private frameService: FrameService, private httpService: HttpHandlerService) { }
+	constructor(private router: Router, private authService: AuthHandlerService, private userService: UserService, private frameService: FrameService, private httpService: HttpHandlerService) { }
 
 	async canActivate(): Promise<boolean | any> {
 		const user = await Auth.currentUserInfo();
@@ -45,13 +45,14 @@ export class LoggedInAuthGuard {
 			sessionStorage.removeItem('raw-state-url');
 			let urlQueryParams = rawStateUrl.split('?');
 			if (urlQueryParams.length == 1)
-				this._router.navigate([urlQueryParams[0]]);
-			else this._router.navigate([urlQueryParams[0]], { queryParams: this.frameService.parseQuery(urlQueryParams[1]) });
+				this.router.navigate([urlQueryParams[0]]);
+			else this.router.navigate([urlQueryParams[0]], { queryParams: this.frameService.parseQuery(urlQueryParams[1]) });
 			return;
 		}
 		if (data.MGOConnectDefaultPage != null && data.MGOConnectDefaultPage != "") {
-			this._router.navigate([data.MGOConnectDefaultPage]);
+			this.router.navigate([data.MGOConnectDefaultPage]);
+		} else {
+			this.router.navigate([`${APP_ROUTES.mgo}/${APP_ROUTES.projectmanager}`]);
 		}
-		else this._router.navigate(['mgo/projectmanager']);
 	}
 }

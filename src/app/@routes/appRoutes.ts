@@ -12,5 +12,9 @@ export class APP_ROUTES {
 	public static forgotPassword: string = 'forgot-password';
 
 	public static cp: string = 'cp';
+	public static portal: string = 'portal';
 	public static products: string = 'products';
+
+	public static mgo: string = 'mgo';
+	public static projectmanager: string = 'projectmanager';
 }
