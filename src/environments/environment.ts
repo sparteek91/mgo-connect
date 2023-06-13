@@ -3,7 +3,7 @@ export const environment = {
     baseApiUrl: 'https://api.mgoconnect.org',
     localApiUrl: 'https://localhost:44307',
     mobileApiUrl: 'https://m.mygovernmentonline.org/api',
-    redirectURL: 'http://localhost:4200/auth/login',
+    redirectURL: 'http://localhost:4300/auth/login',
     siteUrl: 'https://demo.mgoconnect.org',
     myGovernmentOnlineOrg: 'https://www.mygovernmentonline.org',
     myGovernmentOnlineOrgDemo: 'https://demo.mygovernmentonline.org',

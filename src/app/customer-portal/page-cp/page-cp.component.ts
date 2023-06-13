@@ -91,7 +91,7 @@ export class PageCpComponent implements OnInit {
 			if (jurisdictionID && this.selectedJurisdictionID != jurisdictionID) {
 				this.selectedJurisdictionID = jurisdictionID;
 				this.getJurisdictionByID(this.selectedJurisdictionID);
-				// this.getJurisdictionUIConfiguration();
+				this.getJurisdictionUIConfiguration();
 			} else if (Object.keys(params).length && (params.AID || params.aid)) {
 				//  this.navigateToUrl();
 			}
@@ -197,7 +197,7 @@ export class PageCpComponent implements OnInit {
 	getJurisdictionUIConfiguration() {
 		console.log("getJurisdictionUIConfiguration")
 		// this.frameService.showLoader();
-		this.httpService.get(`${API_Routes.getJurisdictionUIConfiguration}` + this.selectedJurisdictionID).subscribe({
+		this.customerHttpHandlerService.get(`${API_Routes.getJurisdictionUIConfiguration}` + this.selectedJurisdictionID).subscribe({
 			next: (res: any) => {
 				if (res[0] && res[0].ID) {
 					try {
