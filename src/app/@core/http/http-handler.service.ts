@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { StorageData } from "../models/storageValue.model";
@@ -15,28 +15,37 @@ export class HttpHandlerService {
 	readonly #data = new BehaviorSubject<StorageData[]>([]);
 	data$ = this.#data.asObservable();
 
-	private httpOptions = {
+	private httpWithOutAuthToken: HttpClient; 
+
+	getHttpOptionForCPUser = (userToken: any) => {
+		if (userToken)
+			return {
+				headers: new HttpHeaders({
+					'Content-Type': 'application/json',
+					'Authorization-Token': userToken
+				})
+			};
+
+		return this.httpOptions;
+	}
+
+	httpOptions = {
 		headers: new HttpHeaders({
 			'Content-Type': 'application/json',
 		})
 	};
 
-	constructor(private readonly http: HttpClient) {}
+	httpOptionsForUrlEncouded = {
+		headers: new HttpHeaders({
+			'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+		})
+	};
 
-	public formUrlParam(url: string, data: any): string {
-		let queryString: string = '';
-		for (const key in data) {
-			if (data.hasOwnProperty(key) && data[key]) {
-				if (!queryString) {
-					queryString = `?${key}=${data[key]}`;
-				} else {
-					queryString += `&${key}=${data[key]}`;
-				}
-			}
-		}
-		return url + queryString;
+	constructor(private readonly http: HttpClient, private readonly httpBackend: HttpBackend) {
+		this.httpWithOutAuthToken = new HttpClient(this.httpBackend);
 	}
 
+	// ------------------------------------------ Auth token Api ------------------------------------------------------------
 	public get(endPoint: string, flag: string = ''): Observable<any> {
 		return this.http.get(endPoint).pipe(map((data: any) => {
 			if (flag) {
@@ -61,11 +70,34 @@ export class HttpHandlerService {
 		}
 		return forkJoin(response);
 	}
+	// ----------------------------------------------------------------------------------------------------------------------
+
+	// --------------------------------------- No Auth token Api ------------------------------------------------------------
+	public getWithoutAuthToken(endPoint: string, userToken: string): Observable<any> {
+		return this.httpWithOutAuthToken.get(endPoint, this.getHttpOptionForCPUser(userToken)).pipe(map((data: any) => {
+			return data;
+		}));
+	}
+	// -----------------------------------------------------------------------------------------------------------------------
 
 	private populateConst(data: any, flag: string): void {
 		if (flag == 'WorkOrderOffline') {
 			getWorkOrderOffline.data = data;
 		}
+	}
+
+	public formUrlParam(url: string, data: any): string {
+		let queryString: string = '';
+		for (const key in data) {
+			if (data.hasOwnProperty(key) && data[key]) {
+				if (!queryString) {
+					queryString = `?${key}=${data[key]}`;
+				} else {
+					queryString += `&${key}=${data[key]}`;
+				}
+			}
+		}
+		return url + queryString;
 	}
 }
 

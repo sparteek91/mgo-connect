@@ -6,7 +6,6 @@ import { CustomerPortalRoutingModule } from './customer-portal-routing.module';
 import { DataLocalService } from "./services/data-local.service";
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserCustomerService } from "./services/user-customer.service";
-import { CustomerHttpHandlerService } from "./services/customer-http-handler.service";
 import { CustomerInterceptor } from "./@interceptors/customer-interceptor.service";
 import { CustomerPortalGuard } from "./@guards/customer-portal.guard";
 
@@ -23,7 +22,6 @@ import { CustomerPortalGuard } from "./@guards/customer-portal.guard";
 		UserCustomerService,
 		CustomerPortalGuard,
 		DataLocalService,
-		CustomerHttpHandlerService,
 		{ provide: HTTP_INTERCEPTORS, useClass: CustomerInterceptor, multi: true },
 	]
 })

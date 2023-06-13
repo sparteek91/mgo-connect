@@ -8,7 +8,6 @@ import { MessageService } from 'primeng/api';
 import { filter } from 'rxjs/operators';
 import { API_Routes, APP_ROUTES } from '../../@routes';
 import { uiDefaultConfiguration } from '../../@constants/cp-default-constant-values';
-import { CustomerHttpHandlerService } from '../services/customer-http-handler.service';
 // import { PlanningAndZoningService } from '../services/planning-and-zoning.service';
 import { UserCustomerService } from '../services/user-customer.service';
 import { HttpHandlerService } from '../../@core/http/http-handler.service';
@@ -45,7 +44,6 @@ export class PageCpComponent implements OnInit {
 	
 	constructor(
 		private frameService: FrameService,
-		private readonly customerHttpHandlerService: CustomerHttpHandlerService,
 		private readonly messageService: MessageService,
 		private readonly router: Router,
 		private readonly activatedRoute: ActivatedRoute,
@@ -197,14 +195,13 @@ export class PageCpComponent implements OnInit {
 	getJurisdictionUIConfiguration() {
 		console.log("getJurisdictionUIConfiguration")
 		// this.frameService.showLoader();
-		this.customerHttpHandlerService.get(`${API_Routes.getJurisdictionUIConfiguration}` + this.selectedJurisdictionID).subscribe({
+		this.httpService.get(`${API_Routes.getJurisdictionUIConfiguration}` + this.selectedJurisdictionID).subscribe({
 			next: (res: any) => {
 				if (res[0] && res[0].ID) {
 					try {
 						if (res[0].Footer1Part1LinkJsonContent) {
 							res[0].Footer1Part1LinkJsonContent = JSON.parse(res[0].Footer1Part1LinkJsonContent);
 						}
-
 						if (res[0].Footer1Part2LinkJsonContent) {
 							res[0].Footer1Part2LinkJsonContent = JSON.parse(res[0].Footer1Part2LinkJsonContent);
 						}
@@ -221,35 +218,10 @@ export class PageCpComponent implements OnInit {
 				this.frameService.showToastPrime('Error!', 'An error ocurred while fetching the Jurisdiction UI Configuration.', 'error', 4000);
 			}
 		});
-		// this.customerPortalHttpRequestService.getCPJurisdictionUIConfiguration(this.selectedJurisdictionID).subscribe(
-		// 	(res: any) => {
-		// 		if (res[0] && res[0].ID) {
-		// 			try {
-		// 				if (res[0].Footer1Part1LinkJsonContent) {
-		// 					res[0].Footer1Part1LinkJsonContent = JSON.parse(res[0].Footer1Part1LinkJsonContent);
-		// 				}
-
-		// 				if (res[0].Footer1Part2LinkJsonContent) {
-		// 					res[0].Footer1Part2LinkJsonContent = JSON.parse(res[0].Footer1Part2LinkJsonContent);
-		// 				}
-		// 			}
-		// 			catch (err) {
-
-		// 			}
-
-		// 			this.frameService.setUIConfiguration(res[0] && res[0].ID ? res[0] : uiDefaultConfiguration);
-		// 		}
-		// 		// this.frameService.hideLoader();
-		// 	},
-		// 	(error: any) => {
-		// 		// this.frameService.hideLoader();
-		// 		this.frameService.showToastPrime('Error!', 'An error ocurred while fetching the Jurisdiction UI Configuration.', 'error', 4000);
-		// 	}
-		// );
 	}
 
 	getJurisdictionByID(jurisdictionID: any) {
-		this.customerHttpHandlerService.getWithoutAuthToken(`${API_Routes.getJurisdictionByID}` + jurisdictionID, this.userToken).subscribe({
+		this.httpService.getWithoutAuthToken(`${API_Routes.getJurisdictionByID}` + jurisdictionID, this.userToken).subscribe({
 			next: (apiResponse: any) => {
 				localStorage.setItem('CPJurisdiction', apiResponse.Jurisdiction);
 				localStorage.setItem('CPJurisdictionID', apiResponse.JurisdictionID);
@@ -260,20 +232,7 @@ export class PageCpComponent implements OnInit {
 				// this.navigateToUrl();
 			},
 			error: (error: any) => this.frameService.showToastPrime('Error!', 'An error ocurred while fetching the Jurisdiction.', 'error', 4000)
-		})
-		// this.customerPortalHttpRequestService.getJurisdictionByID(this.usercpService.getUserToken(), jurisdictionID).subscribe(
-		// 	(apiResponse: any) => {
-		// 		localStorage.setItem('CPJurisdiction', apiResponse.Jurisdiction);
-		// 		localStorage.setItem('CPJurisdictionID', apiResponse.JurisdictionID);
-		// 		localStorage.setItem('CPState', apiResponse.StateID);
-		// 		localStorage.setItem('CPStateName', apiResponse.StateID);
-		// 		this.dataLocalService.changeJurisdictionName.next(apiResponse.Jurisdiction);
-		// 		this.dataLocalService.selectedJurisdiction.next(apiResponse);
-		// 		// this.navigateToUrl();
-		// 	}, (error: any) => {
-		// 		this.frameService.showToastPrime('Error!', 'An error ocurred while fetching the Jurisdiction.', 'error', 4000);
-		// 	}
-		// );
+		});
 	}
 
 	// private navigateToUrl() {
