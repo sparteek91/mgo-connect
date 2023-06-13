@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { StorageData } from "../models/storageValue.model";
@@ -12,18 +12,16 @@ import { StorageData } from "../models/storageValue.model";
 })
 
 export class HttpHandlerService {
-	// httpOptions = {
-	// 	headers: new HttpHeaders({
-	// 		'Content-Type': 'application/json',
-	// 	})
-	// };
 	readonly #data = new BehaviorSubject<StorageData[]>([]);
 	data$ = this.#data.asObservable();
-	private noAuthHttp: HttpClient;
 
-	constructor(private readonly http: HttpClient, private readonly backend: HttpBackend) {
-		this.noAuthHttp = new HttpClient(this.backend);
-	}
+	private httpOptions = {
+		headers: new HttpHeaders({
+			'Content-Type': 'application/json',
+		})
+	};
+
+	constructor(private readonly http: HttpClient) {}
 
 	public formUrlParam(url: string, data: any): string {
 		let queryString: string = '';
@@ -39,14 +37,8 @@ export class HttpHandlerService {
 		return url + queryString;
 	}
 
-	public get(endPoint: string, flag: string = '', isAuth: boolean): Observable<any> {
-		let http: HttpClient;
-		if (!isAuth) {
-			http = this.noAuthHttp;
-		} else {
-			http = this.http;
-		}
-		return http.get(endPoint).pipe(map((data: any) => {
+	public get(endPoint: string, flag: string = ''): Observable<any> {
+		return this.http.get(endPoint).pipe(map((data: any) => {
 			if (flag) {
 				this.populateConst(data, flag)
 			}
@@ -65,11 +57,7 @@ export class HttpHandlerService {
 	public forkJoin(urls: any[]): Observable<any> {
 		let response: any = [];
 		for (let i = 0; i < urls.length; i++) {
-			if (!urls[i].isAuth) {
-				response.push(this.noAuthHttp.get(urls[i].path));
-			} else {
-				response.push(this.http.get(urls[i].path));
-			}
+			response.push(this.http.get(urls[i].path));
 		}
 		return forkJoin(response);
 	}

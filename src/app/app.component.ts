@@ -83,7 +83,7 @@ export class AppComponent {
 		let dateToday = this.frameService.formatDate(new Date());
 		let selectedInspector = this.userService.getCurrentUser().UserID.toString();
 		const endPoint: string = this.httpService.formUrlParam(`${API_Routes.prepoffline + selectedInspector}`, { Start: dateToday, End: dateToday });
-		await this.httpService.get(endPoint, "WorkOrderOffline", true).subscribe((res: any) => {
+		await this.httpService.get(endPoint, "WorkOrderOffline").subscribe((res: any) => {
 			localStorage.setItem('offlineWorkOrders', JSON.stringify(res));
 		}, (error: any) => {
 			this.frameService.showToastPrime('Error!', 'An error ocurred while fetching work orders.', 'error', 4000);
@@ -97,11 +97,10 @@ export class AppComponent {
 			Promise.all(requests.map(async (request: any) => {
 				let httpReq = this.populateHttpRequest(request);
 				this.httpHandler.handle(httpReq).subscribe((res: any) => {
-					
-				},
-					error => {
-						console.log(error);
-					});
+
+				}, (error: any) => {
+					console.log(error);
+				});
 			})).then(data => {
 				localStorage.removeItem('offlineRequests');
 				this.frameService.showToastPrime('Success!', "Your Offline Requests have been executed now.", 'info', 5000);

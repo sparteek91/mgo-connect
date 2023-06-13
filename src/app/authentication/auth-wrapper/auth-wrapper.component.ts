@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FrameService } from '../../@core/mock/frame.service';
 import { environment } from '../../../environments/environment';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 interface ISocialHandles {
 	title: string;
@@ -24,23 +25,22 @@ export class AuthWrapperComponent implements OnInit {
 		{ title: "Facebook", img: "assets/icons/facebook.svg", class: "width-1vw", path: "https://www.facebook.com/mygovernmentonline/" },
 		{ title: "Twitter", img: "assets/icons/twitter.svg", class: "width-2vw", path: "https://twitter.com/MGO_Software" },
 		{ title: "Instagram", img: "assets/icons/instagram.svg", class: "width-2vw", path: "https://www.instagram.com/mygovernmentonline/" },
-	]
+	];
+	private subscription: Subscription = new Subscription();
 	
 	constructor(private frameService: FrameService, private cdr: ChangeDetectorRef, private readonly messageService: MessageService) { }
 
 	ngOnInit(): void {
-		this.frameService.loaderAuth$.subscribe((data) => {
+		const loaderAuth = this.frameService.loaderAuth$.subscribe((data) => {
 			this.loading = data;
 			this.cdr.detectChanges();
 		});
 
-		this.frameService.toast$.subscribe((toast) => {
-			console.log("toast", toast)
+		const toastSubs = this.frameService.toast$.subscribe((toast) => {
 			if (toast) {
 				if (toast.destroyAll) {
 					this.messageService.clear();
-				}
-				else {
+				} else {
 					this.toastObj = toast;
 					this.messageService.clear();
 					if (toast.sticky) {
@@ -52,5 +52,11 @@ export class AuthWrapperComponent implements OnInit {
 				}
 			}
 		});
+		this.subscription.add(loaderAuth);
+		this.subscription.add(toastSubs);
+	}
+
+	ngOnDestroy(): void {
+		this.subscription.unsubscribe();
 	}
 }

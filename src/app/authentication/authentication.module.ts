@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // import { TabViewModule } from 'primeng/tabview';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
+// import { ConfirmDialogModule } from 'primeng/confirmdialog';
 // import { ConfirmationService } from 'primeng/api';
 // import { TooltipModule } from 'primeng/tooltip';
 // import { AccordionModule } from 'primeng/accordion';
@@ -10,9 +10,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { LoginComponent } from './login/login.component';
 import { AuthWrapperComponent } from './auth-wrapper/auth-wrapper.component';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
-// import { CommonModule } from '@angular/common';
-// import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-// import { ForgotPasswordVerificationComponent } from './forgot-password-verification/forgot-password-verification.component';
 import { LoginCirclesComponent } from './login-circles/login-circles.component';
 import { ProductsComponent } from './products/products.component';
 import { HomeLoginComponent } from './home/home.component';
@@ -37,7 +34,7 @@ import { MessageService } from 'primeng/api';
 		CommonModule,
 		// ElementsModule,
 		// TabViewModule,
-		ConfirmDialogModule,
+		// ConfirmDialogModule,
 		// TooltipModule,
 		// AccordionModule,
 		// TableModule,
@@ -50,8 +47,6 @@ import { MessageService } from 'primeng/api';
 	declarations: [
 		LoginComponent,
 		AuthWrapperComponent,
-		// ForgotPasswordComponent,
-		// ForgotPasswordVerificationComponent,
 		LoginCirclesComponent,
 		ProductsComponent,
 		HomeLoginComponent,
@@ -61,7 +56,6 @@ import { MessageService } from 'primeng/api';
 	],
 	providers: [
 		MessageService,
-		// ConfirmationService,
 		MenuService,
 	],
 })

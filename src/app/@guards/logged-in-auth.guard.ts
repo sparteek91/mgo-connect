@@ -32,7 +32,7 @@ export class LoggedInAuthGuard {
 	async prepWorkOrdersOffline(loggedInUser: any) {
 		const dateToday = this.frameService.formatDate(new Date());
 		const endPoint: string = this.httpService.formUrlParam(`${API_Routes.prepoffline + loggedInUser.UserID.toString()}`, {Start: dateToday, End: dateToday});
-		this.httpService.get(endPoint, "WorkOrderOffline", true).subscribe((res: any) => {
+		this.httpService.get(endPoint, "WorkOrderOffline").subscribe((res: any) => {
 			localStorage.setItem('offlineWorkOrders', JSON.stringify(res));
 		}, (error: any) => {
 			this.frameService.showToastPrime('Error!', 'An error ocurred while fetching work orders.', 'error', 4000);

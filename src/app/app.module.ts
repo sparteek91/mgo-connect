@@ -12,7 +12,7 @@ import { CoreModule } from './@core/core.module';
 import { UserService } from './@core/mock/users.service';
 import { AuthGuard } from './@guards/auth.guard';
 import { LoggedInAuthGuard } from './@guards/logged-in-auth.guard';
-import { SignalrService } from "./@core/http/signalr.service";
+// import { SignalrService } from "./@core/http/signalr.service";
 
 @NgModule({
 	declarations: [
@@ -22,7 +22,7 @@ import { SignalrService } from "./@core/http/signalr.service";
 		BrowserModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
-		CookieModule,
+		CookieModule.withOptions(),
 		CoreModule.forRoot(),
 		AppRoutingModule
 	],

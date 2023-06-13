@@ -1,0 +1,36 @@
+<!-- <p-toast [styleClass]="toastObj && toastObj.sticky ? 'toaster-wide' : 'toaster'" position="top-right" key="toast"
+    [baseZIndex]="1000">
+    <ng-template let-message pTemplate="message">
+        <div class="p-flex p-flex-column" style="flex: 1;">
+            <div class="p-text-center">
+                <div>
+                    <i *ngIf="message.severity == 'error'" class="fa fa-exclamation-triangle"
+                        style="font-size: 3rem; color: red;"></i>
+                    <i *ngIf="message.severity == 'success'" class="fas fa-check"
+                        style="font-size: 3rem; color: green;"></i>
+                    <i *ngIf="message.severity == 'info'" class="fas fa-info" style="font-size: 3rem; color: blue;"></i>
+                    <span style="padding-left: 15px; padding-bottom: 10px; font-size: 2rem;">{{message.summary}}</span>
+                </div>
+                <div [ngStyle]="{'overflow-y': toastObj && toastObj.sticky ? 'scroll' : 'auto' }"
+                    style="padding-top: 10px; max-height: 85vh !important;">
+                    <div [innerHtml]="message.detail" style="white-space: pre-line"></div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
+
+<nb-layout windowMode [nbSpinner]="loading" nbSpinnerSize="giant" nbSpinnerStatus="primary">
+    <nb-layout-header class="custom-style" style="margin-bottom: 10px;"
+        [style.background-color]="uiConfiguration?.UI_HeaderBgColor" [style.height]="uiConfiguration?.UI_HeaderHeight"
+        [style.border-color]="uiConfiguration?.UI_HomePageHeaderBorderBottomBackgroundColor">
+        <app-header-customer></app-header-customer>
+    </nb-layout-header>
+
+    <nb-layout-column class="colored-column-basic" fixed style="background-image:url({{backgroundImageUrl}});"
+        [ngClass]="{'bg-config': isHomePageOnly}">
+        <router-outlet></router-outlet>
+    </nb-layout-column>
+</nb-layout> -->
+
+<div>CP PORTAL</div>

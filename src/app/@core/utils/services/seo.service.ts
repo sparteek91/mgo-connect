@@ -1,7 +1,6 @@
 import { Injectable, Inject, PLATFORM_ID, OnDestroy, InjectionToken } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
-// import { NB_DOCUMENT } from '@nebular/theme';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 

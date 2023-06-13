@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		let dateToday = this.frameService.formatDate(new Date());
 		let selectedInspector = loggedInUser.UserID.toString();
 		const endPoint: string = this.httpService.formUrlParam(`${API_Routes.prepoffline + selectedInspector}`, { Start: dateToday, End: dateToday });
-		this.httpService.get(endPoint, "WorkOrderOffline", true).subscribe((res: any) => {
+		this.httpService.get(endPoint, "WorkOrderOffline").subscribe((res: any) => {
 			localStorage.setItem('offlineWorkOrders', JSON.stringify(res));
 		}, (error: any) => {
 			this.frameService.showToastPrime('Error!', 'An error ocurred while fetching work orders.', 'error', 4000);

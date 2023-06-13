@@ -24,6 +24,14 @@ export class API_Routes {
         return this.mobileApiUrl + "helper/getjurisdictions/"; 
     }
 
+    public static get getJurisdictionByID(): string {
+        return this.apiBaseUrl + "cp/GetJurisdictionByID/"; 
+    }
+
+    public static get getJurisdictionUIConfiguration(): string {
+        return this.apiBaseUrl + "cp/GetJurisdictionUIConfiguration/"; 
+    }
+
     public static get contact(): string {
         return this.apiBaseUrl + "contactform"; 
     }

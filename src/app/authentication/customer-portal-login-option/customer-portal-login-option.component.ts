@@ -45,8 +45,8 @@ export class CustomerPortalLoginOptionComponent implements OnInit {
 
 	private getStateAndJurisdiction(): void {
 		const urls: any[] = [
-			{ path: `${API_Routes.getStates}/-`, flag: '', isAuth: false },
-			{ path: `${API_Routes.getJurisdictions}/-`, flag: '', isAuth: false },
+			{ path: `${API_Routes.getStates}-`, flag: '' },
+			{ path: `${API_Routes.getJurisdictions}-`, flag: '' },
 		];
 
 		this.httpService.forkJoin(urls).subscribe({
