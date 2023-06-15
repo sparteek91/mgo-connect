@@ -12,7 +12,8 @@ import { CoreModule } from './@core/core.module';
 import { UserService } from './@core/mock/users.service';
 import { AuthGuard } from './@guards/auth.guard';
 import { LoggedInAuthGuard } from './@guards/logged-in-auth.guard';
-// import { SignalrService } from "./@core/http/signalr.service";
+import { SignalrService } from "./@core/http/signalr.service";
+import { MainHubService } from "./@core/utils/services/main-hub.service";
 
 @NgModule({
 	declarations: [
@@ -33,13 +34,14 @@ import { LoggedInAuthGuard } from './@guards/logged-in-auth.guard';
 		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 		//  { provide: HTTP_INTERCEPTORS, useClass: NotificationInterceptor, multi: true },
-		// SignalrService,
-		// {
-		// 	provide: APP_INITIALIZER,
-		// 	useFactory: (signalrService: SignalrService) => () => signalrService.initiateSignalrConnection(),
-		// 	deps: [SignalrService],
-		// 	multi: true,
-		// }
+		MainHubService,
+		SignalrService,
+		{
+			provide: APP_INITIALIZER,
+			useFactory: (signalrService: SignalrService) => () => signalrService.initiateSignalrConnection(),
+			deps: [SignalrService],
+			multi: true,
+		}
 	],
 	bootstrap: [AppComponent]
 })

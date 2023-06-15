@@ -10,6 +10,9 @@ import { UserCustomerService } from "./services/user-customer.service";
 import { CustomerInterceptor } from "./@interceptors/customer-interceptor.service";
 import { CustomerPortalGuard } from "./@guards/customer-portal.guard";
 import { ProgressBarModule } from 'primeng/progressbar';
+import { DataCookieService } from "./services/data-cookie.service";
+import { CookieModule } from 'ngx-cookie';
+import { AuthCustomerService } from "./services/auth-customer.service";
 
 @NgModule({
 	declarations: [
@@ -20,12 +23,15 @@ import { ProgressBarModule } from 'primeng/progressbar';
 		CustomerPortalRoutingModule,
 		ToastModule,
 		ProgressBarModule,
+		CookieModule
 	],
 	providers: [
 		MessageService,
 		UserCustomerService,
 		CustomerPortalGuard,
 		DataLocalService,
+		DataCookieService,
+		AuthCustomerService,
 		{ provide: HTTP_INTERCEPTORS, useClass: CustomerInterceptor, multi: true },
 	]
 })

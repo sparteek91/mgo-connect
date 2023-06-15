@@ -1,0 +1,231 @@
+<div class="header-container flex-grow-1">
+    <div class="logo-container"
+        [style.max-width]="'calc(20px + ' + (uiConfiguration?.UI_LogoWidth || defaultLogoWidth) + ')'">
+        <button *ngIf="showToggleButton" pButton pRipple type="button"
+            [style.color]="uiConfiguration?.UI_HeaderLinkTextColor" (click)="toggleSidebar($event)" icon="pi pi-bars"
+            class="p-button-text p-button-plain">
+        </button>
+        <a class="logo" routerLink="/cp/portal" (click)="gotoPortal($event)">
+            <img *ngIf="uiConfiguration?.Logo" id="logoImageID" class="logo-navbar"
+                [style.max-height]="uiConfiguration?.UI_LogoHeight" [src]='uiConfiguration?.Logo'
+                [alt]="uiConfiguration?.ParishName" />
+        </a>
+    </div>
+    <nav *ngIf="authService.isLogger() && !showToggleButton" class="navbar navbar-expand-lg navbar-light top-menu"
+        [style.background-color]="uiConfiguration?.UI_HeaderBgColor"
+        [style.max-height]="uiConfiguration?.Nav_Menu_Height">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="menu">
+            <ul class="navbar-nav">
+                <li *ngFor="let item of menu;" class="nav-item"
+                    style.background-color="{{item.description === activeItem ? uiConfiguration?.UI_HomeMainMenuActiveBackgroundColor: uiConfiguration?.UI_HomeMainMenuBackgroundColor}}"
+                    [style.border-radius]="uiConfiguration?.UI_HomeMainMenuBorderRedius"
+                    [class.active-menu-item]="item.description === activeItem"
+                    style.color="{{item.description === activeItem ? uiConfiguration?.UI_HomeMainMenuActiveTextColor : uiConfiguration?.UI_HeaderLinkTextColor}}"
+                    (click)="onMenuClick(item, $event)" (mouseover)="handleMenuItemUI($event)"
+                    (mouseleave)="handleMenuItemUI($event)">
+                    <a *ngIf="!item.isExternal" class="nav-link" [routerLink]="item.url">
+                        {{ item.description }}
+                    </a>
+                    <a *ngIf="item.isExternal" class="nav-link" href="{{item.url}}" target="_blank">
+                        {{ item.description }}
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <nav *ngIf="!authService.isLogger() && !showToggleButton" class="navbar navbar-expand-lg navbar-light top-menu"
+        [style.max-height]="uiConfiguration?.Nav_Menu_Height"
+        [style.background-color]="uiConfiguration?.UI_HeaderBgColor">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="guestMenu">
+            <ul class="navbar-nav">
+                <li *ngFor="let item of guestMenu;" class="nav-item"
+                    style.background-color="{{item.description === activeItem ? uiConfiguration?.UI_HomeMainMenuActiveBackgroundColor: uiConfiguration?.UI_HomeMainMenuBackgroundColor}}"
+                    [style.border-radius]="uiConfiguration?.UI_HomeMainMenuBorderRedius"
+                    [class.active-menu-item]="activeItem === item.description" (click)="onMenuClick(item, $event)"
+                    (mouseover)="handleMenuItemUI($event)" (mouseleave)="handleMenuItemUI($event)"
+                    style.color="{{item.description === activeItem ? uiConfiguration?.UI_HomeMainMenuActiveTextColor : uiConfiguration?.UI_HeaderLinkTextColor}}">
+                    <a *ngIf="!item.isExternal" class="nav-link" [routerLink]="item.url">
+                        {{ item.description }}
+                    </a>
+                    <a *ngIf="item.isExternal" class="nav-link" href="{{item.url}}" target="_blank">
+                        {{ item.description }}
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</div>
+
+<div class="header-container" style="display: contents;">
+    <nb-actions size="small">
+        <nb-action *ngIf="authService.isLogger()" class="control-item" popoverClass="push-notification"
+            icon="bell-outline" badgePosition="top right" badgeStatus="danger"
+            [style.color]="uiConfiguration?.UI_HeaderLinkTextColor"
+            [badgeText]="pushNotificationService.pushNotificationUnreadCount$ | async" [ngbPopover]="popContent"
+            [popoverTitle]="popTitle" placement="bottom" triggers="manual" #p1="ngbPopover"
+            (shown)="onPushNotificationOpen()" (click)="toggleWithNotification(p1)">
+            <ng-template #popContent>
+                <div class="push-notification_item"
+                    *ngFor="let notification of pushNotificationService.pushNotificationsItems$ | async;"
+                    [ngClass]="{'action-not-triggered':!notification.isActionTriggered}">
+                    <div class="text-wrap" (click)="viewNotification(notification)">
+                        {{notification.textMessage}}
+                    </div>
+                    <small>{{notification.timeAgo}}</small>
+                </div>
+            </ng-template>
+            <ng-template #popTitle>
+                <label class="push-notification_header">Notifications</label>
+            </ng-template>
+        </nb-action>
+
+        <nb-action *ngIf="authService.isLogger()" class="user-action">
+            <ng-container *ngIf="!($isAuthorizedUserActionCssSet | async)">
+                {{setAuthoizedStyles()}}
+            </ng-container>
+            <nb-user [style.color]="uiConfiguration?.UI_HeaderLinkTextColor" [nbContextMenu]="userMenu"
+                [name]="fullName" [title]="email">
+            </nb-user>
+        </nb-action>
+
+        <nb-action *ngIf="!authService.isLogger()" class="user-action" [nbContextMenu]="userLogin">
+            <div class="info-container">
+                <div class="juris-title" [style.color]="uiConfiguration?.UI_HeaderLinkTextColor">
+                    <i class="pi pi-user" style="font-size: 1.5rem"></i>
+                    Guest
+                </div>
+            </div>
+        </nb-action>
+
+        <nb-action class="control-item" [nbContextMenu]="userJuris">
+            <div class="info-container">
+                <div class="juris-name" [style.color]="uiConfiguration?.UI_HeaderLinkTextColor">
+                    Current Jurisdiction:
+                </div>
+                <div class="juris-title" [style.color]="uiConfiguration?.UI_HeaderLinkTextColor">
+                    {{ jurisdictionName }}
+                </div>
+            </div>
+        </nb-action>
+    </nb-actions>
+</div>
+
+<p-sidebar [(visible)]="headerBar" styleClass="p-sidebar-md" [baseZIndex]="10000">
+    <div *ngIf="authService.isLogger()" class="container">
+        <div class="row">
+            <div class="col-1 col-md-1 col-lg-1" style="justify-content: flex-end; display: flex;">
+                <i class="pi pi-user" style="font-size: 1.5rem"></i>
+            </div>
+            <div class="col-8 col-md-9 col-lg-10">
+                <p style="margin-bottom: 0px;">{{ fullName }}</p>
+                <p style="margin-bottom: 0px;">{{ email }}</p>
+            </div>
+            <div class="col-1 col-md-1 col-lg-1">
+                <button pButton pRipple type="button" (click)="gotoSetting()" icon="pi pi-cog"
+                    class="p-button-text p-button-plain p-button-lg"></button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!authService.isLogger()" class="container">
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-1 col-md-1 col-lg-1" style="justify-content: flex-end; display: flex;">
+                <i class="pi pi-user" style="font-size: 1.5rem"></i>
+            </div>
+            <div class="col-8 col-md-9 col-lg-10">
+                <p style="margin-bottom: 0px;">
+                    Guest
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item disabled list-group-item-head">
+            SELECTED JURISDICTION
+        </li>
+
+        <li class="list-group-item">
+            <span style="color: grey;">
+                Current Jurisdiction:
+            </span>
+            {{ jurisdictionName }}
+        </li>
+        <li (click)="gotoJurisdiction()"
+            class="list-group-item d-flex justify-content-between align-items-center canClick pointer">
+            Change Jurisdiction
+            <i class="pi pi-angle-right" style="font-size: 1.5rem"></i>
+        </li>
+    </ul>
+
+
+    <ul *ngIf="authService.isLogger()" class="list-group list-group-flush">
+        <li class="list-group-item disabled list-group-item-head">
+            DASHBOARD
+        </li>
+
+        <a (click)="gotoMyProject($event)" routerLink="/cp/my-projects"
+            class="list-group-item d-flex justify-content-between align-items-center canClick pointer">
+            Projects
+            <i class="pi pi-angle-right" style="font-size: 1.5rem"></i>
+        </a>
+
+        <a (click)="gotoPendingInspections($event)" routerLink="/cp/pending-inspections"
+            class="list-group-item d-flex justify-content-between align-items-center canClick pointer">
+            Inspections
+            <i class="pi pi-angle-right" style="font-size: 1.5rem"></i>
+        </a>
+
+        <a (click)="gotoContractorLicenses($event)" routerLink="/cp/contractor-licenses"
+            class="list-group-item d-flex justify-content-between align-items-center canClick pointer">
+            Contractors
+            <i class="pi pi-angle-right" style="font-size: 1.5rem"></i>
+        </a>
+
+        <a (click)="gotoPortal($event)" routerLink="/cp/portal"
+            class="list-group-item d-flex justify-content-between align-items-center canClick pointer">
+            Home
+            <i class="pi pi-angle-right" style="font-size: 1.5rem"></i>
+        </a>
+
+        <li (click)="gotoLogout()"
+            class="list-group-item d-flex justify-content-between align-items-center canClick pointer">
+            Logout
+            <i class="pi pi-angle-right" style="font-size: 1.5rem"></i>
+        </li>
+    </ul>
+
+    <ul *ngIf="!authService.isLogger()" class="list-group list-group-flush">
+        <li class="list-group-item disabled list-group-item-head">
+            ACCOUNT
+        </li>
+
+        <a (click)="gotoNewAccount($event)" routerLink="/cp/info-account"
+            class="list-group-item d-flex justify-content-between align-items-center canClick pointer">
+            New Account
+            <i class="pi pi-angle-right" style="font-size: 1.5rem"></i>
+        </a>
+
+        <a (click)="gotoLogin($event)" routerLink="/cp/login"
+            class="list-group-item d-flex justify-content-between align-items-center canClick pointer">
+            Login
+            <i class="pi pi-angle-right" style="font-size: 1.5rem"></i>
+        </a>
+    </ul>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item disabled list-group-item-head">
+            SUPPORT
+        </li>
+
+        <a href="{{myGovernmentOnlineOrg}}/#contactus" target="_blank"
+            class="list-group-item d-flex justify-content-between align-items-center canClick pointer">
+            Contact
+            <i class="pi pi-angle-right" style="font-size: 1.5rem"></i>
+        </a>
+    </ul>
+
+</p-sidebar>

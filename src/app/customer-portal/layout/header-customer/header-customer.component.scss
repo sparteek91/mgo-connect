@@ -1,0 +1,450 @@
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~@nebular/theme/styles/global/breakpoints";
+@import "../../../@theme/styles/themes";
+
+@include nb-install-component() {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  ::ng-deep {
+    .p-dialog .p-dialog-footer {
+      text-align: center;
+    }
+
+    .logo-navbar {
+      height: auto;
+      // width: 100%;
+      max-height: 40px;
+      max-width: 415px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
+
+    .bell-outline {
+      color: inherit !important;
+    }
+
+    a.list-group-item {
+      text-decoration: none !important;
+    }
+
+    .navbar-light .navbar-nav .nav-link {
+      color: inherit;
+    }
+
+    nb-action {
+      height: auto;
+      display: flex;
+      align-content: center;
+
+      .juris-title {
+        font-family: Inter;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 21.78px;
+      }
+
+      a.icon-container {
+        color: inherit;
+
+        nb-icon {
+          color: inherit;
+        }
+      }
+
+      .juris-name {
+        font-family: Inter;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16.94px;
+      }
+    }
+
+    nb-user {
+      cursor: pointer;
+
+      .user-name {
+        font-family: Inter, "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+          "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 18px !important;
+        color: #222b45;
+        font-weight: 500;
+        line-height: 21.78px;
+      }
+
+      .user-title {
+        font-family: Inter;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16.94px;
+        overflow-wrap: anywhere;
+      }
+
+      .user-picture {
+        background-color: transparent;
+        border: 1px solid #222b45;
+      }
+    }
+
+    .push-notification {
+      &_item {
+        display: block;
+        width: 100%;
+        padding: .25rem 0.5rem;
+        clear: both;
+        border-bottom: 1px solid lightgrey;
+        cursor: pointer;
+
+        &.action-not-triggered {
+          background-color: #dae2f8;
+        }
+
+      }
+
+
+      &_header {
+        // font-size: 1.71429em;
+        margin: 0;
+      }
+    }
+
+    .p-checkbox-label {
+      padding-top: 10px !important;
+    }
+
+    nb-search button {
+      padding: 0 !important;
+    }
+
+    nb-badge {
+      margin-right: 7px;
+    }
+
+    .header-container {
+      display: flex;
+      flex-direction: column;
+      width: auto;
+      height: 100%;
+      font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+        "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+      .sidebar-toggle {
+        @include nb-ltr(padding-right, 1.25rem);
+        @include nb-rtl(padding-left, 1.25rem);
+        text-decoration: none;
+        color: nb-theme(text-hint-color);
+
+        nb-icon {
+          font-size: 1.75rem;
+        }
+      }
+
+      .logo {
+        padding: 0 1.25rem;
+        font-size: 1.75rem;
+        @include nb-ltr(border-left, 1px solid nb-theme(divider-color));
+        @include nb-rtl(border-right, 1px solid nb-theme(divider-color));
+        white-space: nowrap;
+        text-decoration: none;
+        border-left: none !important;
+        padding-left: 0.5rem;
+        width: 100%;
+        height: 100%;
+        max-width: 428px;
+        align-items: center;
+        display: flex;
+      }
+
+      .top-menu {
+        height: auto;
+        padding: 0 !important;
+        box-shadow: none !important;
+        // background: #1c76b9;
+        margin: 0;
+
+        a {
+          text-decoration: none !important;
+          font-family: Open Sans, sans-serif;
+          font-size: 22px !important;
+
+          font-weight: 400;
+          line-height: 1rem;
+          cursor: pointer;
+          // color: white;
+
+          &:hover {
+            background-color: transparent !important;
+            // color: #3366ff;
+          }
+        }
+
+        .dropdown {
+          &:hover {
+            .dropdown-menu {
+              display: block;
+              margin-top: 0;
+            }
+          }
+        }
+      }
+
+      .sidebar-toggle {
+        display: none !important;
+      }
+
+
+
+      .beta-text {
+        padding-right: 10px;
+
+        @media only screen and (max-width: 1000px) {
+          font-size: 24px;
+        }
+
+        @media only screen and (min-width: 768px) and (max-width: 900px) {
+          font-size: 2vw !important;
+        }
+
+        @media only screen and (min-width: 550px) and (max-width: 767px) {
+          font-size: 24px !important;
+        }
+
+        @media only screen and (max-width: 550px) {
+          font-size: 3vw !important;
+        }
+      }
+
+      @media only screen and (max-width: 550px) {
+        .logo {
+          padding-right: 5px !important;
+        }
+      }
+    }
+
+    @media only screen and (max-width: 991px) {
+      burger-menu {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .header-container {
+        flex-direction: row-reverse !important;
+        justify-content: flex-end;
+
+        .sidebar-toggle {
+          display: block !important;
+        }
+
+        .top-menu {
+          display: none;
+        }
+      }
+    }
+
+    @media (min-width: 1200px) and (max-width: 1600px) {
+      .header-container {
+        .top-menu {
+          a {
+            font-size: 22px !important;
+            line-height: 28px !important;
+          }
+        }
+      }
+    }
+
+    @media only screen and (min-width: 1400px) {
+      burger-menu {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .header-container {
+        flex-direction: row !important;
+
+        // .logo-container {
+        //   // max-width: 580px !important;
+        //   max-width: 230px !important;
+
+        //   .logo {
+        //     max-width: 455px !important;
+
+        //     img {
+        //       max-width: 100% !important;
+        //       max-height: 60px !important;
+        //     }
+        //   }
+        // }
+
+        .top-menu {
+          // a {
+          //   font-size: 20px !important;
+          // }
+
+          .dropdown-item {
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+          }
+        }
+      }
+
+      .juris-name {
+        // color: #222b45;
+      }
+
+      .juris-title {
+        // color: #222b45;
+      }
+
+      ::ng-deep nb-user {
+        .user-name {
+          // font-size: 20px !important;
+        }
+      }
+    }
+
+    @media only screen and (min-width: 1440px) {
+      .header-container {
+        flex-direction: row !important;
+
+        // .logo-container {
+        //   max-width: 250px !important;
+        // }
+
+        // .top-menu {
+        //   a {
+        //     font-size: 15px !important;
+        //   }
+        // }
+      }
+
+      nb-user {
+        .user-name {
+          // color: #222b45;
+        }
+
+        .user-title {
+          // color: #222b45;
+        }
+      }
+    }
+
+    @media only screen and (min-width: 1620px) {
+      .header-container {
+        .logo-container {
+          // max-width: 400px !important;
+
+          // .logo {
+          //   max-width: 655px !important;
+
+          //   img {
+          //     max-width: 50% !important;
+          //     max-height: 50px !important;
+          //   }
+          // }
+
+          .top-menu {
+            a {
+              // font-size: 18px !important;
+              font-size: 22px !important;
+              line-height: 30px !important;
+            }
+
+            .dropdown-item {
+              padding-top: 0.8rem !important;
+              padding-bottom: 0.8rem !important;
+            }
+          }
+        }
+
+        // .juris-name {
+        //   font-size: 0.75rem !important;
+        //   font-weight: 400;
+        //   // color: #222b45;
+        // }
+
+        .juris-title {
+          // font-size: 23px !important;
+          // font-weight: 600;
+          // color: #222b45;
+        }
+
+        ::ng-deep nb-user {
+          .user-name {
+            //  font-size: 23px !important;
+            // color: #222b45;
+          }
+
+          .user-title {
+            // color: #222b45;
+          }
+        }
+      }
+
+      @media only screen and (min-width: 1800px) {
+        .header-container {
+          .top-menu {
+            a {
+              font-size: 24px !important;
+              line-height: 34px !important;
+            }
+          }
+        }
+      }
+
+      @include media-breakpoint-down(sm) {
+        .control-item {
+          display: none;
+        }
+
+        .user-action {
+          border: none;
+          padding: 0;
+        }
+      }
+
+      @include media-breakpoint-down(is) {
+        nb-select {
+          display: none;
+        }
+      }
+    }
+
+
+    .header-link {
+      border-right: 2px;
+      border-bottom: 0px;
+      border-top: 0px;
+      // border-color: white;
+      border-left: 0px;
+      border-style: solid;
+    }
+
+    .active-menu-item {
+      .nav-link {
+        font-weight: bolder !important;
+      }
+    }
+
+    .popover-body {
+      max-width: 100%;
+      max-height: 450px !important;
+      overflow: auto;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .nav-item {
+      border-radius: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+}

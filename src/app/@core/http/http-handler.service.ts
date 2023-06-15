@@ -15,7 +15,7 @@ export class HttpHandlerService {
 	readonly #data = new BehaviorSubject<StorageData[]>([]);
 	data$ = this.#data.asObservable();
 
-	private httpWithOutAuthToken: HttpClient; 
+	private httpWithOutAuthToken: HttpClient;
 
 	getHttpOptionForCPUser = (userToken: any) => {
 		if (userToken)
