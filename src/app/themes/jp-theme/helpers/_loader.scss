@@ -1,0 +1,9 @@
+.prime-progress {
+    .p-progressbar {
+        background: map-get(map-get($palette, blue), 4);
+
+        .p-progressbar-value {
+            background: map-get(map-get($palette, blue), 1);
+        }
+    }
+}

@@ -27,8 +27,8 @@ export class PageCpComponent implements OnInit {
 	toastObj: any;
 	private readonly document!: Document;
 	selectedJurisdictionID = null;
-	layoutContainerHtmlComponent = null;
-	layoutContainerHtmlComponentTimeIntervalObj = null;
+	layoutContainerHtmlComponent: any = null;
+	layoutContainerHtmlComponentTimeIntervalObj: any = null;
 	uiConfiguration: any = uiDefaultConfiguration;
 	currentUIHeaderHeight = null;
 	selectedProjectTypeID = null;
@@ -41,7 +41,7 @@ export class PageCpComponent implements OnInit {
 	isHomePageOnly: boolean = false;
 	backgroundImageUrl: string = '';
 	private subscription: Subscription = new Subscription();
-	
+
 	constructor(
 		private frameService: FrameService,
 		private readonly messageService: MessageService,
@@ -98,6 +98,7 @@ export class PageCpComponent implements OnInit {
 		this.frameService.setUIConfiguration(uiDefaultConfiguration);
 		this.frameService.loader$.subscribe((data) => {
 			this.loading = data;
+			console.log("this.loading", this.loading);
 		});
 
 		const toastSubs = this.frameService.toast$.subscribe((toast) => {
@@ -154,43 +155,41 @@ export class PageCpComponent implements OnInit {
 		});
 	}
 
-	ngOnDestroy(): void {
-		this.subscription.unsubscribe();
+	ngAfterViewInit() {
+		if (!this.document) {
+			return;
+		}
+
+		if (!this.layoutContainerHtmlComponent) {
+			let layoutContainer = this.document.getElementsByClassName('layout-container');
+			if (layoutContainer.length) {
+				this.layoutContainerHtmlComponent = layoutContainer[0];
+				if (this.uiConfiguration && this.uiConfiguration.UI_HeaderHeight) {
+					// jQuery('nb-layout-header.custom-style > nav').attr('style', `height: ${this.uiConfiguration.UI_HeaderHeight} !important;`);
+				}
+			}
+			else {
+				this.layoutContainerHtmlComponentTimeIntervalObj = setInterval(() => {
+					let layoutContainer = this.document.getElementsByClassName('layout-container');
+					if (layoutContainer.length) {
+						this.layoutContainerHtmlComponent = layoutContainer[0];
+						clearInterval(this.layoutContainerHtmlComponentTimeIntervalObj);
+						if (this.uiConfiguration && this.uiConfiguration.UI_HeaderHeight) {
+							// jQuery('nb-layout-header.custom-style > nav').attr('style', `height: ${this.uiConfiguration.UI_HeaderHeight} !important;`);
+						}
+					}
+				}, 1000);
+			}
+		}
 	}
 
-	// ngAfterViewInit() {
-	// 	if (!this.document) {
-	// 		return;
-	// 	}
-
-	// 	if (!this.layoutContainerHtmlComponent) {
-	// 		let layoutContainer = this.document.getElementsByClassName('layout-container');
-	// 		if (layoutContainer.length) {
-	// 			this.layoutContainerHtmlComponent = layoutContainer[0];
-	// 			if (this.uiConfiguration && this.uiConfiguration.UI_HeaderHeight) {
-	// 				jQuery('nb-layout-header.custom-style > nav').attr('style', `height: ${this.uiConfiguration.UI_HeaderHeight} !important;`);
-	// 			}
-	// 		}
-	// 		else {
-	// 			this.layoutContainerHtmlComponentTimeIntervalObj = setInterval(() => {
-	// 				let layoutContainer = this.document.getElementsByClassName('layout-container');
-	// 				if (layoutContainer.length) {
-	// 					this.layoutContainerHtmlComponent = layoutContainer[0];
-	// 					clearInterval(this.layoutContainerHtmlComponentTimeIntervalObj);
-	// 					if (this.uiConfiguration && this.uiConfiguration.UI_HeaderHeight) {
-	// 						jQuery('nb-layout-header.custom-style > nav').attr('style', `height: ${this.uiConfiguration.UI_HeaderHeight} !important;`);
-	// 					}
-	// 				}
-	// 			}, 1000)
-	// 		}
-	// 	}
-	// }
-
-	// ngOnDestroy() {
-	// 	this.layoutContainerHtmlComponent = null;
-	// 	if (this.layoutContainerHtmlComponentTimeIntervalObj)
-	// 		clearInterval(this.layoutContainerHtmlComponentTimeIntervalObj);
-	// }
+	ngOnDestroy(): void {
+		this.subscription.unsubscribe();
+		this.layoutContainerHtmlComponent = null;
+		if (this.layoutContainerHtmlComponentTimeIntervalObj) {
+			clearInterval(this.layoutContainerHtmlComponentTimeIntervalObj);
+		}
+	}
 
 	getJurisdictionUIConfiguration() {
 		console.log("getJurisdictionUIConfiguration")
