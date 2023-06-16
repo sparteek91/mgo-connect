@@ -58,8 +58,22 @@
 			}
 
 			::ng-deep {
-				.p-submenu-header {
-					display: none;
+				.p-menu {
+					padding: 0 5px;
+
+					.p-submenu-header {
+						display: none;
+					}
+	
+					.p-menuitem {
+						font-weight: 500;
+						color: #222b45;
+						font-size: .875rem;
+	
+						.p-menuitem-link {
+							justify-content: center;
+						}
+					}
 				}
 			}
 		}

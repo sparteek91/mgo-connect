@@ -14,6 +14,7 @@ export class APP_ROUTES {
 	public static cp: string = 'cp';
 	public static portal: string = 'portal';
 	public static products: string = 'products';
+	public static home: string = 'home';
 
 	public static mgo: string = 'mgo';
 	public static projectmanager: string = 'projectmanager';

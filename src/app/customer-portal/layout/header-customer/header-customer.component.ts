@@ -14,7 +14,7 @@ import { environment } from '../../../../environments/environment';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
 import { HttpHandlerService } from "../../../@core/http/http-handler.service";
-import { API_Routes } from 'src/app/@routes';
+import { API_Routes, APP_ROUTES } from 'src/app/@routes';
 import { MenuItem } from 'primeng/api';
 
 // declare const jQuery: any;
@@ -60,7 +60,7 @@ export class HeaderCustomerComponent implements OnInit, OnDestroy {
 				{
 					label: 'Change Jurisdiction',
 					command: () => { },
-					routerLink: "/cp/home"
+					routerLink: `/${APP_ROUTES.cp}/` + `${APP_ROUTES.home}`,
 				},
 			]
 		},
@@ -72,7 +72,7 @@ export class HeaderCustomerComponent implements OnInit, OnDestroy {
 				{
 					label: 'Login',
 					command: () => { },
-					routerLink: "/cp/login"
+					routerLink: `/${APP_ROUTES.cp}/` + `${APP_ROUTES.login}`,
 				},
 			]
 		},
