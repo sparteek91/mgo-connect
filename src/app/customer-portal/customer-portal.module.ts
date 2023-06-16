@@ -13,17 +13,27 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { DataCookieService } from "./services/data-cookie.service";
 import { CookieModule } from 'ngx-cookie';
 import { AuthCustomerService } from "./services/auth-customer.service";
+import { HeaderCustomerComponent } from "./layout/header-customer/header-customer.component";
+import { PushNotificationService } from "../@core/utils/services/push-notification.service";
+import { LocalStorageService } from "../@core/utils/services/local-storage.service";
+import { ButtonModule } from 'primeng/button';
+import { SidebarModule } from 'primeng/sidebar';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
 	declarations: [
-		PageCpComponent
+		PageCpComponent,
+		HeaderCustomerComponent
 	],
 	imports: [
 		CommonModule,
 		CustomerPortalRoutingModule,
 		ToastModule,
 		ProgressBarModule,
-		CookieModule
+		CookieModule,
+		ButtonModule,
+		SidebarModule,
+		MenuModule
 	],
 	providers: [
 		MessageService,
@@ -32,6 +42,8 @@ import { AuthCustomerService } from "./services/auth-customer.service";
 		DataLocalService,
 		DataCookieService,
 		AuthCustomerService,
+		PushNotificationService,
+		LocalStorageService,
 		{ provide: HTTP_INTERCEPTORS, useClass: CustomerInterceptor, multi: true },
 	]
 })

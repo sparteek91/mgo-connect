@@ -78,6 +78,12 @@ export class HttpHandlerService {
 			return data;
 		}));
 	}
+
+	public postWithoutAuthToken(endPoint: string, payload: any, userToken: string): Observable<any> {
+		return this.httpWithOutAuthToken.post(endPoint, payload, this.getHttpOptionForCPUser(userToken)).pipe(map((data: any) => {
+			return data;
+		}));
+	}
 	// -----------------------------------------------------------------------------------------------------------------------
 
 	private populateConst(data: any, flag: string): void {

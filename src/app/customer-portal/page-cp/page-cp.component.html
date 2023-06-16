@@ -33,10 +33,10 @@
     </nb-layout-column>
 </nb-layout> -->
 <div>
-    <p-progressBar mode="indeterminate" [style]="{'height': '2px'}" class="prime-progress" *ngIf="!loading"></p-progressBar>
-    <header [style.background-color]="uiConfiguration?.UI_HeaderBgColor" [style.height]="uiConfiguration?.UI_HeaderHeight"
+    <p-progressBar mode="indeterminate" [style]="{'height': '1px'}" class="prime-progress" *ngIf="!loading"></p-progressBar>
+    <header class="p-3" [style.background-color]="uiConfiguration?.UI_HeaderBgColor" [style.height]="uiConfiguration?.UI_HeaderHeight"
         [style.border-color]="uiConfiguration?.UI_HomePageHeaderBorderBottomBackgroundColor">
-        <!-- <app-header-customer></app-header-customer> -->
+        <app-header-customer></app-header-customer>
     </header>
 </div>
 

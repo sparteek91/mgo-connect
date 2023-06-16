@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 // import { NbMediaBreakpointsService, NbMenuService, NbThemeService } from '@nebular/theme';
 import { FrameService } from '../../../@core/mock/frame.service';
@@ -6,15 +6,18 @@ import { PushNotificationService } from '../../../@core/utils/services/push-noti
 import { MenuService } from '../../../authentication/menu/menu.service';
 import { uiDefaultConfiguration } from '../../../@constants/cp-default-constant-values';
 import { AuthCustomerService } from '../../services/auth-customer.service';
-import { CustomerPortalHttpRequestService } from 'app/customer-portal/services/customer-portal-http-request.service';
-import { UserCustomerService } from '../../../@core/mock/users.service';
-import { CpTopNonPublicMenuItems, CpTopPublicMenuItems, MenuItemNameEnum } from 'app/customer-portal/utils/constant-data';
+import { UserCustomerService } from "../../services/user-customer.service";
+import { CpTopNonPublicMenuItems, CpTopPublicMenuItems, MenuItemNameEnum } from '../../../@constants/constant-data';
 import { DataCookieService } from '../../services/data-cookie.service';
 import { DataLocalService } from '../../services/data-local.service';
 import { environment } from '../../../../environments/environment';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
-declare const jQuery: any;
+import { HttpHandlerService } from "../../../@core/http/http-handler.service";
+import { API_Routes } from 'src/app/@routes';
+import { MenuItem } from 'primeng/api';
+
+// declare const jQuery: any;
 
 @Component({
 	selector: 'app-header-customer',
@@ -51,22 +54,28 @@ export class HeaderCustomerComponent implements OnInit, OnDestroy {
 		}
 	];
 
-	userJuris: any[] = [
+	userJuris: MenuItem[] = [
 		{
-			title: 'Change Jurisdiction',
-			data: {
-				id: 'changeJurisdiction'
-			}
-		}
+			items: [
+				{
+					label: 'Change Jurisdiction',
+					command: () => { },
+					routerLink: "/cp/home"
+				},
+			]
+		},
 	];
 
-	userLogin: any[] = [
+	userLogin: MenuItem[] = [
 		{
-			title: 'Login',
-			data: {
-				id: 'login'
-			}
-		}
+			items: [
+				{
+					label: 'Login',
+					command: () => { },
+					routerLink: "/cp/login"
+				},
+			]
+		},
 	];
 
 	notificationlist!: any[];
@@ -80,7 +89,7 @@ export class HeaderCustomerComponent implements OnInit, OnDestroy {
 	breakpointMap: any = {};
 	currentBreakpoint: any = {};
 	private destroy$: Subject<void> = new Subject<void>();
-	showToggleButton = false;
+	showToggleButton: boolean = false;
 	$isAuthorizedUserActionCssSet = new BehaviorSubject<boolean>(false);
 	defaultLogoWidth = '200px';
 	userID!: number;
@@ -97,8 +106,18 @@ export class HeaderCustomerComponent implements OnInit, OnDestroy {
 		// private breakpointService: NbMediaBreakpointsService,
 		// private themeService: NbThemeService,
 		public readonly pushNotificationService: PushNotificationService,
-		private readonly customerPortalHttpRequestService: CustomerPortalHttpRequestService,
+		private httpService: HttpHandlerService
 	) {
+		this.getScreenSize();
+	}
+
+	@HostListener('window:resize', ['$event'])
+	getScreenSize(event?: any) {
+		if (window.innerWidth >= 1400) {
+			this.showToggleButton = false;
+		} else {
+			this.showToggleButton = true;
+		}
 	}
 
 	ngOnInit(): void {
@@ -115,7 +134,7 @@ export class HeaderCustomerComponent implements OnInit, OnDestroy {
 			if (this.userToken == undefined || this.userToken == null || this.userToken == '') this.userToken = '-';
 		}
 
-		// required
+		// To remove
 		// this.breakpointMap = this.breakpointService.getBreakpointsMap();
 		// this.themeService.onMediaQueryChange().pipe(map(([, currentBreakpoint]) => currentBreakpoint), takeUntil(this.destroy$),).subscribe((currentBreakpoint: any) => {
 		// 	this.setMediaQueryChange(currentBreakpoint);
@@ -132,7 +151,8 @@ export class HeaderCustomerComponent implements OnInit, OnDestroy {
 				this.uiConfiguration = data;
 
 				if (data.UI_LogoHeight) {
-					this.logoImageIDElementRef = jQuery('#logoImageID');
+					this.logoImageIDElementRef = document.getElementById("logoImageID");
+					// jQuery('#logoImageID');
 					if (this.logoImageIDElementRef?.length) {
 						this.logoImageIDElementRef.attr('style', `max-height: ${this.uiConfiguration.UI_LogoHeight} !important;max-width: ${this.uiConfiguration.UI_LogoWidth} !important;`);
 						setTimeout(() => {
@@ -141,8 +161,9 @@ export class HeaderCustomerComponent implements OnInit, OnDestroy {
 					}
 					else {
 						this.setLogoStyleIntervalObj = setInterval(() => {
-							this.logoImageIDElementRef = jQuery('#logoImageID');
-							if (this.logoImageIDElementRef.length) {
+							this.logoImageIDElementRef = document.getElementById("logoImageID");
+							// jQuery('#logoImageID');
+							if (this.logoImageIDElementRef?.length) {
 								this.logoImageIDElementRef.attr('style', `max-height: ${this.uiConfiguration.UI_LogoHeight} !important;max-width: ${this.uiConfiguration.UI_LogoWidth} !important;`);
 								if (this.setLogoStyleIntervalObj)
 									clearInterval(this.setLogoStyleIntervalObj);
@@ -155,7 +176,8 @@ export class HeaderCustomerComponent implements OnInit, OnDestroy {
 					this.$isAuthorizedUserActionCssSet.next(false);
 				}
 
-				this.setMediaQueryChange(this.currentBreakpoint);
+				// To remove
+				// this.setMediaQueryChange(this.currentBreakpoint);
 			}
 		});
 
@@ -424,31 +446,33 @@ export class HeaderCustomerComponent implements OnInit, OnDestroy {
 	}
 
 	setAuthoizedStyles() {
-		let userContainer = jQuery('nb-user .user-container');
-		if (userContainer && userContainer.length) {
-			jQuery(userContainer).children('div.user-picture').css({
-				color: this.uiConfiguration.UI_HeaderLinkTextColor,
-				border: `1px solid ${this.uiConfiguration.UI_HeaderLinkTextColor}`
-			});
-			jQuery(userContainer).find('div.info-container>div').css({
-				color: this.uiConfiguration.UI_HeaderLinkTextColor
-			});
+		// required
+		// let userContainer = jQuery('nb-user .user-container');
+		// if (userContainer && userContainer.length) {
+		// 	jQuery(userContainer).children('div.user-picture').css({
+		// 		color: this.uiConfiguration.UI_HeaderLinkTextColor,
+		// 		border: `1px solid ${this.uiConfiguration.UI_HeaderLinkTextColor}`
+		// 	});
+		// 	jQuery(userContainer).find('div.info-container>div').css({
+		// 		color: this.uiConfiguration.UI_HeaderLinkTextColor
+		// 	});
 
-			this.$isAuthorizedUserActionCssSet.next(true);
-		}
+		// 	this.$isAuthorizedUserActionCssSet.next(true);
+		// }
 	}
 
-	setMediaQueryChange(currentBreakpoint: any) {
-		this.currentBreakpoint = currentBreakpoint;
-		if (this.uiConfiguration.Logo && currentBreakpoint.width > this.breakpointMap.xl) {
-			this.showToggleButton = false;
-		} else if (!this.uiConfiguration.Logo && currentBreakpoint.width >= this.breakpointMap.lg) {
-			this.showToggleButton = false;
-		}
-		else {
-			this.showToggleButton = true;
-		}
-	}
+	// To remove
+	// setMediaQueryChange(currentBreakpoint: any) {
+	// 	this.currentBreakpoint = currentBreakpoint;
+	// 	if (this.uiConfiguration.Logo && currentBreakpoint.width > this.breakpointMap.xl) {
+	// 		this.showToggleButton = false;
+	// 	} else if (!this.uiConfiguration.Logo && currentBreakpoint.width >= this.breakpointMap.lg) {
+	// 		this.showToggleButton = false;
+	// 	}
+	// 	else {
+	// 		this.showToggleButton = true;
+	// 	}
+	// }
 
 
 
@@ -475,37 +499,35 @@ export class HeaderCustomerComponent implements OnInit, OnDestroy {
 		let notificationlist = this.pushNotificationService.pushNotificationsItems$.getValue();
 		let notificationlistIds = notificationlist.filter((x: any) => !x.isRead).map((x: any) => x.pushNotificationMessageID);
 		if (notificationlistIds.length) {
-			this.customerPortalHttpRequestService.setMarkAsReadNotifications(notificationlistIds, this.userID, this.userCustomerService.getUserToken()).subscribe(
-				(res: any) => {
+			const endPoint: string = `${API_Routes.jpv2Notification + this.userID}/push/read`
+			this.httpService.postWithoutAuthToken(endPoint, notificationlistIds, this.userCustomerService.getUserToken()).subscribe({
+				next: (res: any) => {
 					if (res > 0) {
 						let notificationlist = this.pushNotificationService.pushNotificationsItems$.getValue();
 						let notificationItem = null;
-
 						notificationlistIds.forEach((notificationlistId: any) => {
 							notificationItem = notificationlist.find((x: any) => x.pushNotificationMessageID == notificationlistId);
 							if (notificationItem) {
 								notificationItem.isRead = true;
 							}
 						})
-
 						this.pushNotificationService.pushNotificationsItems$.next(notificationlist);
-
 						this.pushNotificationService.reset();
-
 					}
 				},
-				(error: any) => {
+				error: (err: any) => {
 					this.frameService.hideLoader();
 				}
-			);
+			});
 		}
 	}
 
 
 	viewNotification(notificationItem: any) {
 		if (!notificationItem.isActionTriggered && notificationItem.pushNotificationMessageID > 0) {
-			this.customerPortalHttpRequestService.setMarkAsActionTriggered(notificationItem.pushNotificationMessageID, this.userID, this.userCustomerService.getUserToken()).subscribe(
-				(res: any) => {
+			const endPoint: string = `${API_Routes.jpv2Notification + this.userID}/push/actiontriggered`
+			this.httpService.postWithoutAuthToken(endPoint, notificationItem.pushNotificationMessageID, this.userCustomerService.getUserToken()).subscribe({
+				next: (res: any) => {
 					if (res) {
 						let notificationlist = this.pushNotificationService.pushNotificationsItems$.getValue();
 						let notificationItemIndex = notificationlist.findIndex((x: any) => x.pushNotificationMessageID == notificationItem.pushNotificationMessageID);
@@ -517,9 +539,10 @@ export class HeaderCustomerComponent implements OnInit, OnDestroy {
 						this.getApplicationUIDByApplicationID(notificationItem);
 					}
 				},
-				(error: any) => {
+				error: (err: any) => {
 					this.frameService.hideLoader();
-				});
+				}
+			});
 		}
 		else {
 			this.getApplicationUIDByApplicationID(notificationItem);
@@ -531,29 +554,31 @@ export class HeaderCustomerComponent implements OnInit, OnDestroy {
 
 		switch (notificationItem.entityType) {
 			case 'ApplicationCP': {
-				this.customerPortalHttpRequestService.getApplicationUIDByApplicationID(id, this.userCustomerService.getUserToken()).subscribe(
-					(res: any) => {
+				const endPoint: string = `${API_Routes.getApplicationUID + id}`;
+				this.httpService.getWithoutAuthToken(endPoint, this.userCustomerService.getUserToken()).subscribe({
+					next: (res: any) => {
 						if (res && res.applicationUID) {
 							this.router.navigate(['/cp/application-details', res.applicationUID])
 						}
 					},
-					(error: any) => {
+					error: (err: any) => {
 						this.frameService.hideLoader();
 					}
-				);
+				});
 			}
 				break;
 			case 'ApplicationCommentCP': {
-				this.customerPortalHttpRequestService.getApplicationUIDByCommentID(id, this.userID, this.userCustomerService.getUserToken()).subscribe(
-					(res: any) => {
+				const endPoint: string = `${API_Routes.getApplicationUIDByCommentID + id}/` + this.userID;
+				this.httpService.getWithoutAuthToken(endPoint, this.userCustomerService.getUserToken()).subscribe({
+					next: (res: any) => {
 						if (res && res.data.uuID) {
 							this.router.navigate(['/cp/application-details', res.data.uuID])
 						}
 					},
-					(error: any) => {
+					error: (err: any) => {
 						this.frameService.hideLoader();
 					}
-				);
+				});
 				break;
 			}
 		}

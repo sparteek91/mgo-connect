@@ -1,5 +1,15 @@
 // @import "~bootstrap/scss/mixins/breakpoints";
 // @import "~@nebular/theme/styles/global/breakpoints";
+
+// new
+app-header-customer {
+	display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+// old
 ::ng-deep {
 	body {
 		padding-top: 0;
