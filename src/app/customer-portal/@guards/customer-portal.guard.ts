@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@a
 import { CookieService } from 'ngx-cookie';
 import { Observable } from 'rxjs';
 import { UserCustomerService } from '../services/user-customer.service';
+import { APP_ROUTES } from '../../@routes';
 
 @Injectable()
 
@@ -31,7 +32,7 @@ export class CustomerPortalGuard {
 			return true;
 		} else {
 			sessionStorage.setItem('raw-state-url-cp', state.url);
-			this.router.navigate(['/cp/login']);
+			this.router.navigate([`/${APP_ROUTES.cp}/${APP_ROUTES.login}`]);
 			return false;
 		}
 	}

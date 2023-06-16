@@ -32,6 +32,18 @@ export class API_Routes {
         return this.apiBaseUrl + "cp/GetJurisdictionUIConfiguration/"; 
     }
 
+    public static get jpv2Notification(): string {
+        return this.apiBaseUrl + "jpv2/notifications/"; 
+    }
+
+    public static get getApplicationUID(): string {
+        return this.apiBaseUrl + "cp/Applications/GetApplicationUID/"; 
+    }
+
+    public static get getApplicationUIDByCommentID(): string {
+        return this.apiBaseUrl + "api/v3/cp/application/get-applicationuid-by-commentid/"; 
+    }
+
     public static get contact(): string {
         return this.apiBaseUrl + "contactform"; 
     }

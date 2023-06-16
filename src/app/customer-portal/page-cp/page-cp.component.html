@@ -1,6 +1,6 @@
-<!-- <p-toast [styleClass]="toastObj && toastObj.sticky ? 'toaster-wide' : 'toaster'" position="top-right" key="toast"
+<p-toast [styleClass]="toastObj && toastObj.sticky ? 'toaster-wide' : 'toaster'" position="top-right" key="toast"
     [baseZIndex]="1000">
-    <ng-template let-message pTemplate="message">
+    <!-- <ng-template let-message pTemplate="message">
         <div class="p-flex p-flex-column" style="flex: 1;">
             <div class="p-text-center">
                 <div>
@@ -17,10 +17,10 @@
                 </div>
             </div>
         </div>
-    </ng-template>
+    </ng-template> -->
 </p-toast>
 
-<nb-layout windowMode [nbSpinner]="loading" nbSpinnerSize="giant" nbSpinnerStatus="primary">
+<!-- <nb-layout windowMode [nbSpinner]="loading" nbSpinnerSize="giant" nbSpinnerStatus="primary">
     <nb-layout-header class="custom-style" style="margin-bottom: 10px;"
         [style.background-color]="uiConfiguration?.UI_HeaderBgColor" [style.height]="uiConfiguration?.UI_HeaderHeight"
         [style.border-color]="uiConfiguration?.UI_HomePageHeaderBorderBottomBackgroundColor">
@@ -32,5 +32,12 @@
         <router-outlet></router-outlet>
     </nb-layout-column>
 </nb-layout> -->
+<div>
+    <p-progressBar mode="indeterminate" [style]="{'height': '1px'}" class="prime-progress" *ngIf="!loading"></p-progressBar>
+    <header class="p-3" [style.background-color]="uiConfiguration?.UI_HeaderBgColor" [style.height]="uiConfiguration?.UI_HeaderHeight"
+        [style.border-color]="uiConfiguration?.UI_HomePageHeaderBorderBottomBackgroundColor">
+        <app-header-customer></app-header-customer>
+    </header>
+</div>
 
-<div>CP PORTAL</div>
+<!-- <div>CP PORTAL</div> -->
